@@ -12,7 +12,7 @@ export const Header = (currentPath: string = '/') => html`
         <div class="flex items-center gap-4">
           <!-- Desktop Navigation -->
           <nav class="hidden md:block">
-            <ul class="flex gap-8 list-none">
+            <ul class="flex gap-8 list-none items-center">
               <li>
                 <a 
                   href="/" 
@@ -21,36 +21,50 @@ export const Header = (currentPath: string = '/') => html`
                   Inicio
                 </a>
               </li>
-              <li>
-                <a 
-                  href="/servicios" 
-                  class="dark:text-slate-400 dark:hover:text-slate-50 text-slate-600 hover:text-slate-900 font-medium transition-colors ${currentPath === '/servicios' ? 'dark:text-slate-50 text-slate-900' : ''}"
+              
+              <!-- Dropdown Menu -->
+              <li class="relative group">
+                <button 
+                  class="flex items-center gap-1 dark:text-slate-400 dark:hover:text-slate-50 text-slate-600 hover:text-slate-900 font-medium transition-colors focus:outline-none"
+                  aria-haspopup="true"
                 >
-                  Servicios
-                </a>
+                  Explorar
+                  <svg class="w-4 h-4 transition-transform group-hover:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                  </svg>
+                </button>
+                
+                <!-- Dropdown Content -->
+                <div class="absolute top-full left-1/2 -translate-x-1/2 mt-2 w-48 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 transform group-hover:translate-y-0 translate-y-2">
+                  <div class="glass border dark:border-slate-700/50 border-slate-200 rounded-xl shadow-xl overflow-hidden p-2 flex flex-col gap-1">
+                    <a 
+                      href="/servicios" 
+                      class="block px-4 py-2 rounded-lg text-sm dark:text-slate-300 dark:hover:text-white dark:hover:bg-slate-700/50 text-slate-600 hover:text-slate-900 hover:bg-slate-100 transition-colors ${currentPath === '/servicios' ? 'bg-slate-100 dark:bg-slate-700/50 font-semibold' : ''}"
+                    >
+                      Servicios
+                    </a>
+                    <a 
+                      href="/precios" 
+                      class="block px-4 py-2 rounded-lg text-sm dark:text-slate-300 dark:hover:text-white dark:hover:bg-slate-700/50 text-slate-600 hover:text-slate-900 hover:bg-slate-100 transition-colors ${currentPath === '/precios' ? 'bg-slate-100 dark:bg-slate-700/50 font-semibold' : ''}"
+                    >
+                      Precios
+                    </a>
+                    <a 
+                      href="/sobre-mi" 
+                      class="block px-4 py-2 rounded-lg text-sm dark:text-slate-300 dark:hover:text-white dark:hover:bg-slate-700/50 text-slate-600 hover:text-slate-900 hover:bg-slate-100 transition-colors ${currentPath === '/sobre-mi' ? 'bg-slate-100 dark:bg-slate-700/50 font-semibold' : ''}"
+                    >
+                      Sobre Mí
+                    </a>
+                  </div>
+                </div>
               </li>
-              <li>
-                <a 
-                  href="/precios" 
-                  class="dark:text-slate-400 dark:hover:text-slate-50 text-slate-600 hover:text-slate-900 font-medium transition-colors ${currentPath === '/precios' ? 'dark:text-slate-50 text-slate-900' : ''}"
-                >
-                  Precios
-                </a>
-              </li>
+
               <li>
                 <a 
                   href="/blog" 
                   class="dark:text-slate-400 dark:hover:text-slate-50 text-slate-600 hover:text-slate-900 font-medium transition-colors ${currentPath === '/blog' ? 'dark:text-slate-50 text-slate-900' : ''}"
                 >
                   Blog
-                </a>
-              </li>
-              <li>
-                <a 
-                  href="/sobre-mi" 
-                  class="dark:text-slate-400 dark:hover:text-slate-50 text-slate-600 hover:text-slate-900 font-medium transition-colors ${currentPath === '/sobre-mi' ? 'dark:text-slate-50 text-slate-900' : ''}"
-                >
-                  Sobre Mí
                 </a>
               </li>
               <li>
