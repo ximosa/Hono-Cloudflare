@@ -15020,6 +15020,59 @@ var HomePage = /* @__PURE__ */ __name(() => {
         </div>
       </section>
 
+      <!-- FAQ Section -->
+      <section class="py-20">
+        <div class="max-w-4xl mx-auto px-6">
+          <h2 class="text-3xl md:text-4xl font-bold text-center mb-12">Preguntas Frecuentes</h2>
+          
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <!-- FAQ 1 -->
+            <div class="glass p-6 rounded-2xl border dark:border-slate-700/50 border-slate-200 hover:shadow-lg transition-shadow">
+              <h3 class="font-bold text-lg mb-3 flex items-center gap-2">
+                <span class="bg-blue-100 dark:bg-blue-900/30 text-blue-600 rounded-lg p-1 text-sm">🛠️</span> 
+                ¿Qué tecnologías utilizas?
+              </h3>
+              <p class="text-slate-600 dark:text-slate-400 text-sm leading-relaxed">
+                Me especializo en el stack moderno: Hono, Cloudflare Workers, React y TypeScript. Esto garantiza aplicaciones ultrarrápidas, seguras y escalables.
+              </p>
+            </div>
+
+            <!-- FAQ 2 -->
+            <div class="glass p-6 rounded-2xl border dark:border-slate-700/50 border-slate-200 hover:shadow-lg transition-shadow">
+              <h3 class="font-bold text-lg mb-3 flex items-center gap-2">
+                <span class="bg-purple-100 dark:bg-purple-900/30 text-purple-600 rounded-lg p-1 text-sm">🎯</span> 
+                ¿Haces trabajos a medida?
+              </h3>
+              <p class="text-slate-600 dark:text-slate-400 text-sm leading-relaxed">
+                Sí, desarrollo soluciones 100% personalizadas. No uso plantillas genéricas; diseño y programo pensando en las necesidades específicas de tu negocio.
+              </p>
+            </div>
+
+            <!-- FAQ 3 -->
+            <div class="glass p-6 rounded-2xl border dark:border-slate-700/50 border-slate-200 hover:shadow-lg transition-shadow">
+              <h3 class="font-bold text-lg mb-3 flex items-center gap-2">
+                <span class="bg-green-100 dark:bg-green-900/30 text-green-600 rounded-lg p-1 text-sm">🤝</span> 
+                ¿Ofreces soporte?
+              </h3>
+              <p class="text-slate-600 dark:text-slate-400 text-sm leading-relaxed">
+                Absolutamente. Ofrezco planes de mantenimiento para asegurar que tu sitio funcione perfectamente, esté seguro y actualizado mes a mes.
+              </p>
+            </div>
+
+            <!-- FAQ 4 -->
+            <div class="glass p-6 rounded-2xl border dark:border-slate-700/50 border-slate-200 hover:shadow-lg transition-shadow">
+              <h3 class="font-bold text-lg mb-3 flex items-center gap-2">
+                <span class="bg-orange-100 dark:bg-orange-900/30 text-orange-600 rounded-lg p-1 text-sm">⏱️</span> 
+                ¿Cuánto tiempo tarda?
+              </h3>
+              <p class="text-slate-600 dark:text-slate-400 text-sm leading-relaxed">
+                Depende de la complejidad. Una landing page puede estar lista en 1 semana, mientras que un sitio corporativo completo suele tomar de 2 a 4 semanas.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
       <!-- CTA Final -->
       <section class="py-20">
         <div class="max-w-5xl mx-auto px-6">
