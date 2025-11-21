@@ -1,14 +1,77 @@
 import { html } from 'hono/html'
 
-export const Layout = (title: string, content: any) => html`
+interface SEOMetadata {
+  title: string
+  description: string
+  keywords?: string
+  ogImage?: string
+  ogType?: string
+  canonicalUrl?: string
+  author?: string
+  structuredData?: any
+}
+
+export const Layout = (metadata: SEOMetadata, content: any) => {
+  const {
+    title,
+    description,
+    keywords = 'desarrollo web, Hono, Cloudflare Workers, TypeScript, React, aplicaciones web, edge computing',
+    ogImage = 'https://mi-app-hono.ximosa.workers.dev/og-image.jpg',
+    ogType = 'website',
+    canonicalUrl = 'https://mi-app-hono.ximosa.workers.dev',
+    author = 'WebGae Dev',
+    structuredData
+  } = metadata
+
+  return html`
   <!DOCTYPE html>
   <html lang="es">
   <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    
+    <!-- Primary Meta Tags -->
     <title>${title}</title>
-    <meta name="description" content="Desarrollador Web Full Stack especializado en Hono, Cloudflare Workers y React.">
+    <meta name="title" content="${title}">
+    <meta name="description" content="${description}">
+    <meta name="keywords" content="${keywords}">
+    <meta name="author" content="${author}">
+    <meta name="robots" content="index, follow">
+    <meta name="language" content="Spanish">
+    <meta name="revisit-after" content="7 days">
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="${canonicalUrl}">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="${ogType}">
+    <meta property="og:url" content="${canonicalUrl}">
+    <meta property="og:title" content="${title}">
+    <meta property="og:description" content="${description}">
+    <meta property="og:image" content="${ogImage}">
+    <meta property="og:site_name" content="WebGae Dev">
+    <meta property="og:locale" content="es_ES">
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="${canonicalUrl}">
+    <meta property="twitter:title" content="${title}">
+    <meta property="twitter:description" content="${description}">
+    <meta property="twitter:image" content="${ogImage}">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    
+    <!-- Stylesheet -->
     <link href="/styles.css" rel="stylesheet">
+    
+    ${structuredData ? html`
+    <!-- Structured Data (JSON-LD) -->
+    <script type="application/ld+json">
+      ${JSON.stringify(structuredData)}
+    </script>
+    ` : ''}
     <style>
       body {
         font-family: 'Inter', system-ui, -apple-system, sans-serif;
@@ -257,3 +320,4 @@ export const Layout = (title: string, content: any) => html`
   </body>
   </html>
 `
+}

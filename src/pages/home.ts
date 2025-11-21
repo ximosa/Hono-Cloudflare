@@ -4,7 +4,32 @@ import { Header } from '../components/header'
 import { Footer } from '../components/footer'
 
 export const HomePage = () => {
-  return Layout('Inicio - WebGae Dev', html`
+  const structuredData = {
+    "@context": "https://schema.org",
+    "@type": "ProfessionalService",
+    "name": "WebGae Dev",
+    "description": "Desarrollo de aplicaciones web ultrarrápidas y escalables con Hono, Cloudflare Workers y TypeScript",
+    "url": "https://mi-app-hono.ximosa.workers.dev",
+    "logo": "https://mi-app-hono.ximosa.workers.dev/logo.png",
+    "sameAs": [
+      "https://github.com/ximosa"
+    ],
+    "address": {
+      "@type": "PostalAddress",
+      "addressCountry": "ES"
+    },
+    "priceRange": "$$",
+    "areaServed": "ES"
+  }
+
+  return Layout({
+    title: 'WebGae Dev - Desarrollo Web Profesional con Hono y Cloudflare Workers',
+    description: 'Desarrollo aplicaciones web ultrarrápidas y escalables utilizando Hono, Cloudflare Workers, TypeScript y React. Especialista en Edge Computing y arquitecturas modernas.',
+    keywords: 'desarrollo web, Hono framework, Cloudflare Workers, TypeScript, React, edge computing, aplicaciones web rápidas, full stack developer, desarrollo profesional',
+    canonicalUrl: 'https://mi-app-hono.ximosa.workers.dev',
+    ogType: 'website',
+    structuredData
+  }, html`
     ${Header('/')}
     
     <main>

@@ -8,12 +8,16 @@ import { AboutPage } from './pages/about'
 import { ServicesPage } from './pages/services'
 import { PricingPage } from './pages/pricing'
 import { Post, Comment } from './types'
+import { sitemapRoutes } from './routes/seo'
 
 import { serveStatic } from 'hono/cloudflare-workers'
 // @ts-ignore
 import manifest from '__STATIC_CONTENT_MANIFEST'
 
 const app = new Hono<{ Bindings: Bindings }>()
+
+// SEO Routes (sitemap.xml, robots.txt)
+app.route('/', sitemapRoutes)
 
 // Servir archivos estáticos
 app.use('/static/*', serveStatic({ root: './', manifest }))

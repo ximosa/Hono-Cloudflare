@@ -4,7 +4,12 @@ import { Header } from '../components/header'
 import { Footer } from '../components/footer'
 
 export const ContactPage = (success?: boolean) => {
-  return Layout('Contacto - Mi Blog', html`
+  return Layout({
+    title: 'Contacto - Hablemos de tu Proyecto | WebGae Dev',
+    description: 'Ponte en contacto para discutir tu proyecto web. Respuesta rápida y presupuesto sin compromiso. Desarrollo web profesional.',
+    keywords: 'contacto desarrollo web, presupuesto web, consulta web, contratar desarrollador',
+    canonicalUrl: 'https://mi-app-hono.ximosa.workers.dev/contacto'
+  }, html`
     ${Header('/contacto')}
     
     <main class="py-12">

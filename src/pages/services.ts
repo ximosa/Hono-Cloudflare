@@ -4,7 +4,12 @@ import { Header } from '../components/header'
 import { Footer } from '../components/footer'
 
 export const ServicesPage = () => {
-    return Layout('Servicios - WebGae Dev', html`
+  return Layout({
+    title: 'Servicios de Desarrollo Web - WebGae Dev',
+    description: 'Desarrollo web profesional, aplicaciones web escalables y optimización SEO. Sitios ultrarrápidos con Hono, Cloudflare Workers y React.',
+    keywords: 'desarrollo web, aplicaciones web, SEO, optimización web, Hono, Cloudflare Workers, React, TypeScript',
+    canonicalUrl: 'https://mi-app-hono.ximosa.workers.dev/servicios'
+  }, html`
     ${Header('/servicios')}
     
     <main>

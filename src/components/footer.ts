@@ -11,10 +11,10 @@ export const Footer = () => html`
           Desarrollado con Hono + Cloudflare Workers + Supabase
         </p>
         <div class="flex gap-6 justify-center mt-4">
-          <a href="#" class="dark:text-slate-400 dark:hover:text-primary-400 text-slate-600 hover:text-slate-900 transition-colors" aria-label="Twitter">
+          <a href="https://x.com/RedXimo" class="dark:text-slate-400 dark:hover:text-primary-400 text-slate-600 hover:text-slate-900 transition-colors" aria-label="Twitter">
             Twitter
           </a>
-          <a href="#" class="dark:text-slate-400 dark:hover:text-primary-400 text-slate-600 hover:text-slate-900 transition-colors" aria-label="GitHub">
+          <a href="https://github.com/ximosa" class="dark:text-slate-400 dark:hover:text-primary-400 text-slate-600 hover:text-slate-900 transition-colors" aria-label="GitHub">
             GitHub
           </a>
           <a href="https://dev.webgae.com/admin" class="dark:text-slate-400 dark:hover:text-primary-400 text-slate-600 hover:text-slate-900 transition-colors" aria-label="LinkedIn">

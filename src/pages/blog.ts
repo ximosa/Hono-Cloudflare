@@ -5,7 +5,12 @@ import { Footer } from '../components/footer'
 import { Post } from '../types'
 
 export const BlogPage = (posts: Post[]) => {
-  return Layout('Blog - Mi Blog', html`
+  return Layout({
+    title: 'Blog - Artículos sobre Desarrollo Web | WebGae Dev',
+    description: 'Artículos y tutoriales sobre desarrollo web moderno, Hono, Cloudflare Workers, React, TypeScript y mejores prácticas de programación.',
+    keywords: 'blog desarrollo web, tutoriales programación, artículos web development, Hono tutorials, Cloudflare Workers blog',
+    canonicalUrl: 'https://mi-app-hono.ximosa.workers.dev/blog'
+  }, html`
     ${Header('/blog')}
     
     <main class="py-12">

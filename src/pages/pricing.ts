@@ -4,7 +4,12 @@ import { Header } from '../components/header'
 import { Footer } from '../components/footer'
 
 export const PricingPage = () => {
-    return Layout('Precios - WebGae Dev', html`
+  return Layout({
+    title: 'Precios y Planes - Desarrollo Web Profesional | WebGae Dev',
+    description: 'Planes de desarrollo web transparentes y escalables. Desde landing pages hasta aplicaciones empresariales. Sin costos ocultos.',
+    keywords: 'precios desarrollo web, planes web, presupuesto web, costos desarrollo, landing page precio',
+    canonicalUrl: 'https://mi-app-hono.ximosa.workers.dev/precios'
+  }, html`
     ${Header('/precios')}
     
     <main>

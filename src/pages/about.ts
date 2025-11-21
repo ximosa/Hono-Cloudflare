@@ -4,7 +4,12 @@ import { Header } from '../components/header'
 import { Footer } from '../components/footer'
 
 export const AboutPage = () => {
-    return Layout('Sobre Mí - WebGae Dev', html`
+  return Layout({
+    title: 'Sobre Mí - Desarrollador Full Stack | WebGae Dev',
+    description: 'Desarrollador Full Stack especializado en Hono, Cloudflare Workers, React y TypeScript. Creando experiencias digitales memorables con código limpio y moderno.',
+    keywords: 'desarrollador full stack, programador web, freelance developer, Hono developer, Cloudflare Workers',
+    canonicalUrl: 'https://mi-app-hono.ximosa.workers.dev/sobre-mi'
+  }, html`
     ${Header('/sobre-mi')}
     
     <main>
@@ -78,15 +83,15 @@ export const AboutPage = () => {
           
           <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
             ${[
-            { name: 'JavaScript/TypeScript', icon: '⚡', desc: 'Lenguaje Principal' },
-            { name: 'Hono & Cloudflare', icon: '🔥', desc: 'Backend & Edge' },
-            { name: 'React & Next.js', icon: '⚛️', desc: 'Frontend Moderno' },
-            { name: 'Tailwind CSS', icon: '🎨', desc: 'Estilos & Diseño' },
-            { name: 'Node.js', icon: '🟢', desc: 'Runtime' },
-            { name: 'Supabase/SQL', icon: '🗄️', desc: 'Base de Datos' },
-            { name: 'Git & GitHub', icon: '📦', desc: 'Control de Versiones' },
-            { name: 'UI/UX Design', icon: '✨', desc: 'Prototipado' }
-        ].map(skill => html`
+      { name: 'JavaScript/TypeScript', icon: '⚡', desc: 'Lenguaje Principal' },
+      { name: 'Hono & Cloudflare', icon: '🔥', desc: 'Backend & Edge' },
+      { name: 'React & Next.js', icon: '⚛️', desc: 'Frontend Moderno' },
+      { name: 'Tailwind CSS', icon: '🎨', desc: 'Estilos & Diseño' },
+      { name: 'Node.js', icon: '🟢', desc: 'Runtime' },
+      { name: 'Supabase/SQL', icon: '🗄️', desc: 'Base de Datos' },
+      { name: 'Git & GitHub', icon: '📦', desc: 'Control de Versiones' },
+      { name: 'UI/UX Design', icon: '✨', desc: 'Prototipado' }
+    ].map(skill => html`
               <div class="glass p-6 rounded-2xl border dark:border-slate-700/50 border-slate-200 hover:-translate-y-1 hover:shadow-lg transition-all duration-300 group">
                 <div class="text-4xl mb-4 group-hover:scale-110 transition-transform duration-300">${skill.icon}</div>
                 <h3 class="font-bold text-lg mb-1 text-slate-800 dark:text-slate-200">${skill.name}</h3>
