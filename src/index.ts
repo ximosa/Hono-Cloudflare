@@ -62,16 +62,60 @@ app.get('/blog/:slug', async (c) => {
             .from('comments')
             .select('*')
             .eq('post_id', post.id)
+            .eq('approved', true) // Solo mostrar comentarios aprobados
             .order('created_at', { ascending: true })
 
         if (commentsError) {
-            console.error('Error fetching comments:', commentsError)
+            console.error('❌ Error Supabase (GET comments):', JSON.stringify(commentsError, null, 2))
+        } else {
+            console.log('✅ Comentarios cargados:', comments?.length || 0)
         }
 
-        return c.html(BlogPostPage(post as Post, (comments as Comment[]) || []))
+        // Verificar si venimos de enviar un comentario exitosamente
+        const showSuccessMessage = c.req.query('comment_success') === 'true'
+
+        return c.html(BlogPostPage(post as Post, (comments as Comment[]) || [], showSuccessMessage))
     } catch (error) {
-        console.error('Error:', error)
+        console.error('❌ Error General (GET post):', error)
         return c.html('<h1>Error al cargar el post</h1>', 500)
+    }
+})
+
+// Manejar envío de comentarios
+app.post('/blog/:slug/comment', async (c) => {
+    const slug = c.req.param('slug')
+    const body = await c.req.parseBody()
+    const { post_id, author_name, author_email, content } = body
+    const supabase = createSupabaseClient(c.env)
+
+    console.log('📝 Intentando guardar comentario:', { post_id, author_name, author_email })
+
+    try {
+        const { data, error } = await supabase
+            .from('comments')
+            .insert([
+                {
+                    post_id: Number(post_id),
+                    author_name: String(author_name),
+                    author_email: String(author_email),
+                    content: String(content),
+                    approved: false // Por defecto pendiente de aprobación
+                }
+            ])
+            .select()
+
+        if (error) {
+            console.error('❌ Error Supabase (INSERT comment):', JSON.stringify(error, null, 2))
+            return c.html(`<h1>Error al guardar: ${error.message}</h1><p>Detalles: ${error.details || ''}</p><a href="/blog/${slug}">Volver</a>`, 500)
+        }
+
+        console.log('✅ Comentario guardado correctamente:', data)
+
+        // Redirigir de vuelta al post con ancla a la sección de comentarios
+        return c.redirect(`/blog/${slug}?comment_success=true#comments`)
+    } catch (error) {
+        console.error('❌ Error General (POST comment):', error)
+        return c.html(`<h1>Error inesperado</h1><p>${String(error)}</p>`, 500)
     }
 })
 

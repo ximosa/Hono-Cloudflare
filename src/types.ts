@@ -14,7 +14,9 @@ export interface Post {
 export interface Comment {
     id: number
     post_id: number
-    author: string
+    author_name: string
+    author_email: string
     content: string
+    approved: boolean
     created_at: string
 }

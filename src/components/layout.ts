@@ -263,6 +263,33 @@ export const Layout = (title: string, content: any) => html`
       
       html:not(.dark) .prose blockquote {
         color: #64748b;
+        border-left-color: #0f172a;
+      }
+
+      /* Fixes for Lists in Light Mode */
+      html:not(.dark) .prose ul, 
+      html:not(.dark) .prose ol {
+        color: #334155;
+      }
+      
+      html:not(.dark) .prose li {
+        color: #334155;
+      }
+
+      html:not(.dark) .prose ul > li::before {
+        background-color: #94a3b8; /* Bullet color */
+      }
+
+      html:not(.dark) .prose ol > li::before {
+        color: #64748b; /* Number color */
+      }
+
+      /* Fixes for Inline Code in Light Mode */
+      html:not(.dark) .prose code {
+        background-color: #f1f5f9;
+        color: #0f172a;
+        border: 1px solid #e2e8f0;
+        font-weight: 600;
       }
     </style>
     <script>

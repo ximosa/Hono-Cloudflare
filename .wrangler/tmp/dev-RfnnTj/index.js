@@ -700,14 +700,14 @@ var require_PostgrestBuilder = __commonJS({
        * ```
        */
       constructor(builder) {
-        var _a4, _b;
+        var _a5, _b;
         this.shouldThrowOnError = false;
         this.method = builder.method;
         this.url = builder.url;
         this.headers = new Headers(builder.headers);
         this.schema = builder.schema;
         this.body = builder.body;
-        this.shouldThrowOnError = (_a4 = builder.shouldThrowOnError) !== null && _a4 !== void 0 ? _a4 : false;
+        this.shouldThrowOnError = (_a5 = builder.shouldThrowOnError) !== null && _a5 !== void 0 ? _a5 : false;
         this.signal = builder.signal;
         this.isMaybeSingle = (_b = builder.isMaybeSingle) !== null && _b !== void 0 ? _b : false;
         if (builder.fetch) {
@@ -751,7 +751,7 @@ var require_PostgrestBuilder = __commonJS({
           body: JSON.stringify(this.body),
           signal: this.signal
         }).then(async (res2) => {
-          var _a4, _b, _c, _d;
+          var _a5, _b, _c, _d;
           let error = null;
           let data = null;
           let count = null;
@@ -763,7 +763,7 @@ var require_PostgrestBuilder = __commonJS({
               if (body === "") {
               } else if (this.headers.get("Accept") === "text/csv") {
                 data = body;
-              } else if (this.headers.get("Accept") && ((_a4 = this.headers.get("Accept")) === null || _a4 === void 0 ? void 0 : _a4.includes("application/vnd.pgrst.plan+text"))) {
+              } else if (this.headers.get("Accept") && ((_a5 = this.headers.get("Accept")) === null || _a5 === void 0 ? void 0 : _a5.includes("application/vnd.pgrst.plan+text"))) {
                 data = body;
               } else {
                 data = JSON.parse(body);
@@ -833,11 +833,11 @@ var require_PostgrestBuilder = __commonJS({
         });
         if (!this.shouldThrowOnError) {
           res = res.catch((fetchError) => {
-            var _a4, _b, _c, _d, _e, _f;
+            var _a5, _b, _c, _d, _e, _f;
             let errorDetails = "";
             const cause = fetchError === null || fetchError === void 0 ? void 0 : fetchError.cause;
             if (cause) {
-              const causeMessage = (_a4 = cause === null || cause === void 0 ? void 0 : cause.message) !== null && _a4 !== void 0 ? _a4 : "";
+              const causeMessage = (_a5 = cause === null || cause === void 0 ? void 0 : cause.message) !== null && _a5 !== void 0 ? _a5 : "";
               const causeCode = (_b = cause === null || cause === void 0 ? void 0 : cause.code) !== null && _b !== void 0 ? _b : "";
               errorDetails = `${(_c = fetchError === null || fetchError === void 0 ? void 0 : fetchError.name) !== null && _c !== void 0 ? _c : "FetchError"}: ${fetchError === null || fetchError === void 0 ? void 0 : fetchError.message}`;
               errorDetails += `
@@ -1080,7 +1080,7 @@ var require_PostgrestTransformBuilder = __commonJS({
        * or `"json"`
        */
       explain({ analyze = false, verbose = false, settings = false, buffers = false, wal = false, format = "text" } = {}) {
-        var _a4;
+        var _a5;
         const options = [
           analyze ? "analyze" : null,
           verbose ? "verbose" : null,
@@ -1088,7 +1088,7 @@ var require_PostgrestTransformBuilder = __commonJS({
           buffers ? "buffers" : null,
           wal ? "wal" : null
         ].filter(Boolean).join("|");
-        const forMediatype = (_a4 = this.headers.get("Accept")) !== null && _a4 !== void 0 ? _a4 : "application/json";
+        const forMediatype = (_a5 = this.headers.get("Accept")) !== null && _a5 !== void 0 ? _a5 : "application/json";
         this.headers.set("Accept", `application/vnd.pgrst.plan+${format}; for="${forMediatype}"; options=${options};`);
         if (format === "json") {
           return this;
@@ -1641,7 +1641,7 @@ var require_PostgrestQueryBuilder = __commonJS({
        * inserts.
        */
       insert(values, { count, defaultToNull = true } = {}) {
-        var _a4;
+        var _a5;
         const method = "POST";
         if (count) {
           this.headers.append("Prefer", `count=${count}`);
@@ -1662,7 +1662,7 @@ var require_PostgrestQueryBuilder = __commonJS({
           headers: this.headers,
           schema: this.schema,
           body: values,
-          fetch: (_a4 = this.fetch) !== null && _a4 !== void 0 ? _a4 : fetch
+          fetch: (_a5 = this.fetch) !== null && _a5 !== void 0 ? _a5 : fetch
         });
       }
       /**
@@ -1704,7 +1704,7 @@ var require_PostgrestQueryBuilder = __commonJS({
        * `ignoreDuplicates: false`. This also only applies when doing bulk upserts.
        */
       upsert(values, { onConflict, ignoreDuplicates = false, count, defaultToNull = true } = {}) {
-        var _a4;
+        var _a5;
         const method = "POST";
         this.headers.append("Prefer", `resolution=${ignoreDuplicates ? "ignore" : "merge"}-duplicates`);
         if (onConflict !== void 0)
@@ -1728,7 +1728,7 @@ var require_PostgrestQueryBuilder = __commonJS({
           headers: this.headers,
           schema: this.schema,
           body: values,
-          fetch: (_a4 = this.fetch) !== null && _a4 !== void 0 ? _a4 : fetch
+          fetch: (_a5 = this.fetch) !== null && _a5 !== void 0 ? _a5 : fetch
         });
       }
       /**
@@ -1753,7 +1753,7 @@ var require_PostgrestQueryBuilder = __commonJS({
        * numbers.
        */
       update(values, { count } = {}) {
-        var _a4;
+        var _a5;
         const method = "PATCH";
         if (count) {
           this.headers.append("Prefer", `count=${count}`);
@@ -1764,7 +1764,7 @@ var require_PostgrestQueryBuilder = __commonJS({
           headers: this.headers,
           schema: this.schema,
           body: values,
-          fetch: (_a4 = this.fetch) !== null && _a4 !== void 0 ? _a4 : fetch
+          fetch: (_a5 = this.fetch) !== null && _a5 !== void 0 ? _a5 : fetch
         });
       }
       /**
@@ -1787,7 +1787,7 @@ var require_PostgrestQueryBuilder = __commonJS({
        * numbers.
        */
       delete({ count } = {}) {
-        var _a4;
+        var _a5;
         const method = "DELETE";
         if (count) {
           this.headers.append("Prefer", `count=${count}`);
@@ -1797,7 +1797,7 @@ var require_PostgrestQueryBuilder = __commonJS({
           url: this.url,
           headers: this.headers,
           schema: this.schema,
-          fetch: (_a4 = this.fetch) !== null && _a4 !== void 0 ? _a4 : fetch
+          fetch: (_a5 = this.fetch) !== null && _a5 !== void 0 ? _a5 : fetch
         });
       }
     };
@@ -1898,7 +1898,7 @@ var require_PostgrestClient = __commonJS({
        * numbers.
        */
       rpc(fn, args = {}, { head: head2 = false, get: get2 = false, count } = {}) {
-        var _a4;
+        var _a5;
         let method;
         const url = new URL(`${this.url}/rpc/${fn}`);
         let body;
@@ -1921,7 +1921,7 @@ var require_PostgrestClient = __commonJS({
           headers,
           schema: this.schemaName,
           body,
-          fetch: (_a4 = this.fetch) !== null && _a4 !== void 0 ? _a4 : fetch
+          fetch: (_a5 = this.fetch) !== null && _a5 !== void 0 ? _a5 : fetch
         });
       }
     };
@@ -3842,7 +3842,7 @@ var FunctionsClient = class {
    */
   invoke(functionName_1) {
     return __awaiter(this, arguments, void 0, function* (functionName, options = {}) {
-      var _a4;
+      var _a5;
       let timeoutId;
       let timeoutController;
       try {
@@ -3904,7 +3904,7 @@ var FunctionsClient = class {
         if (!response.ok) {
           throw new FunctionsHttpError(response);
         }
-        let responseType = ((_a4 = response.headers.get("Content-Type")) !== null && _a4 !== void 0 ? _a4 : "text/plain").split(";")[0].trim();
+        let responseType = ((_a5 = response.headers.get("Content-Type")) !== null && _a5 !== void 0 ? _a5 : "text/plain").split(";")[0].trim();
         let data;
         if (responseType === "application/json") {
           data = yield response.json();
@@ -3967,7 +3967,7 @@ var WebSocketFactory = class {
   constructor() {
   }
   static detectEnvironment() {
-    var _a4;
+    var _a5;
     if (typeof WebSocket !== "undefined") {
       return { type: "native", constructor: WebSocket };
     }
@@ -3984,7 +3984,7 @@ var WebSocketFactory = class {
         workaround: "Use Cloudflare Workers WebSocket API for server-side WebSocket handling, or deploy to a different runtime."
       };
     }
-    if (typeof globalThis !== "undefined" && globalThis.EdgeRuntime || typeof navigator !== "undefined" && ((_a4 = "Cloudflare-Workers") === null || _a4 === void 0 ? void 0 : _a4.includes("Vercel-Edge"))) {
+    if (typeof globalThis !== "undefined" && globalThis.EdgeRuntime || typeof navigator !== "undefined" && ((_a5 = "Cloudflare-Workers") === null || _a5 === void 0 ? void 0 : _a5.includes("Vercel-Edge"))) {
       return {
         type: "unsupported",
         error: "Edge runtime detected (Vercel Edge/Netlify Edge). WebSockets are not supported in edge functions.",
@@ -4067,7 +4067,7 @@ Suggested solution: ${env.workaround}`;
     try {
       const env = this.detectEnvironment();
       return env.type === "native" || env.type === "ws";
-    } catch (_a4) {
+    } catch (_a5) {
       return false;
     }
   }
@@ -4151,17 +4151,17 @@ var Serializer = class {
     return callback(JSON.stringify(payload));
   }
   _binaryEncodeUserBroadcastPush(message) {
-    var _a4;
-    if (this._isArrayBuffer((_a4 = message.payload) === null || _a4 === void 0 ? void 0 : _a4.payload)) {
+    var _a5;
+    if (this._isArrayBuffer((_a5 = message.payload) === null || _a5 === void 0 ? void 0 : _a5.payload)) {
       return this._encodeBinaryUserBroadcastPush(message);
     } else {
       return this._encodeJsonUserBroadcastPush(message);
     }
   }
   _encodeBinaryUserBroadcastPush(message) {
-    var _a4, _b, _c, _d;
+    var _a5, _b, _c, _d;
     const topic = message.topic;
-    const ref = (_a4 = message.ref) !== null && _a4 !== void 0 ? _a4 : "";
+    const ref = (_a5 = message.ref) !== null && _a5 !== void 0 ? _a5 : "";
     const joinRef = (_b = message.join_ref) !== null && _b !== void 0 ? _b : "";
     const userEvent = message.payload.event;
     const userPayload = (_d = (_c = message.payload) === null || _c === void 0 ? void 0 : _c.payload) !== null && _d !== void 0 ? _d : new ArrayBuffer(0);
@@ -4185,9 +4185,9 @@ var Serializer = class {
     return combined.buffer;
   }
   _encodeJsonUserBroadcastPush(message) {
-    var _a4, _b, _c, _d;
+    var _a5, _b, _c, _d;
     const topic = message.topic;
-    const ref = (_a4 = message.ref) !== null && _a4 !== void 0 ? _a4 : "";
+    const ref = (_a5 = message.ref) !== null && _a5 !== void 0 ? _a5 : "";
     const joinRef = (_b = message.join_ref) !== null && _b !== void 0 ? _b : "";
     const userEvent = message.payload.event;
     const userPayload = (_d = (_c = message.payload) === null || _c === void 0 ? void 0 : _c.payload) !== null && _d !== void 0 ? _d : {};
@@ -4258,8 +4258,8 @@ var Serializer = class {
     return { join_ref: null, ref: null, topic, event: this.BROADCAST_EVENT, payload: data };
   }
   _isArrayBuffer(buffer) {
-    var _a4;
-    return buffer instanceof ArrayBuffer || ((_a4 = buffer === null || buffer === void 0 ? void 0 : buffer.constructor) === null || _a4 === void 0 ? void 0 : _a4.name) === "ArrayBuffer";
+    var _a5;
+    return buffer instanceof ArrayBuffer || ((_a5 = buffer === null || buffer === void 0 ? void 0 : buffer.constructor) === null || _a5 === void 0 ? void 0 : _a5.name) === "ArrayBuffer";
   }
 };
 
@@ -4324,8 +4324,8 @@ var PostgresTypes;
   PostgresTypes2["tstzrange"] = "tstzrange";
 })(PostgresTypes || (PostgresTypes = {}));
 var convertChangeData = /* @__PURE__ */ __name((columns, record, options = {}) => {
-  var _a4;
-  const skipTypes = (_a4 = options.skipTypes) !== null && _a4 !== void 0 ? _a4 : [];
+  var _a5;
+  const skipTypes = (_a5 = options.skipTypes) !== null && _a5 !== void 0 ? _a5 : [];
   if (!record) {
     return {};
   }
@@ -4517,9 +4517,9 @@ var Push = class {
     this.payload = Object.assign(Object.assign({}, this.payload), payload);
   }
   receive(status, callback) {
-    var _a4;
+    var _a5;
     if (this._hasReceived(status)) {
-      callback((_a4 = this.receivedResp) === null || _a4 === void 0 ? void 0 : _a4.response);
+      callback((_a5 = this.receivedResp) === null || _a5 === void 0 ? void 0 : _a5.response);
     }
     this.recHooks.push({ status, callback });
     return this;
@@ -4715,8 +4715,8 @@ var RealtimePresence = class _RealtimePresence {
       }, "onLeave");
     }
     this.map(joins, (key, newPresences) => {
-      var _a4;
-      const currentPresences = (_a4 = state[key]) !== null && _a4 !== void 0 ? _a4 : [];
+      var _a5;
+      const currentPresences = (_a5 = state[key]) !== null && _a5 !== void 0 ? _a5 : [];
       state[key] = this.cloneDeep(newPresences);
       if (currentPresences.length > 0) {
         const joinedPresenceRefs = state[key].map((m) => m.presence_ref);
@@ -4847,7 +4847,7 @@ var RealtimeChannel = class _RealtimeChannel {
    * ```
    */
   constructor(topic, params = { config: {} }, socket) {
-    var _a4, _b;
+    var _a5, _b;
     this.topic = topic;
     this.params = params;
     this.socket = socket;
@@ -4906,19 +4906,19 @@ var RealtimeChannel = class _RealtimeChannel {
     this.presence = new RealtimePresence(this);
     this.broadcastEndpointURL = httpEndpointURL(this.socket.endPoint);
     this.private = this.params.config.private || false;
-    if (!this.private && ((_b = (_a4 = this.params.config) === null || _a4 === void 0 ? void 0 : _a4.broadcast) === null || _b === void 0 ? void 0 : _b.replay)) {
+    if (!this.private && ((_b = (_a5 = this.params.config) === null || _a5 === void 0 ? void 0 : _a5.broadcast) === null || _b === void 0 ? void 0 : _b.replay)) {
       throw `tried to use replay on public channel '${this.topic}'. It must be a private channel.`;
     }
   }
   /** Subscribe registers your client with the server */
   subscribe(callback, timeout = this.timeout) {
-    var _a4, _b, _c;
+    var _a5, _b, _c;
     if (!this.socket.isConnected()) {
       this.socket.connect();
     }
     if (this.state == CHANNEL_STATES.closed) {
       const { config: { broadcast, presence, private: isPrivate } } = this.params;
-      const postgres_changes = (_b = (_a4 = this.bindings.postgres_changes) === null || _a4 === void 0 ? void 0 : _a4.map((r) => r.filter)) !== null && _b !== void 0 ? _b : [];
+      const postgres_changes = (_b = (_a5 = this.bindings.postgres_changes) === null || _a5 === void 0 ? void 0 : _a5.map((r) => r.filter)) !== null && _b !== void 0 ? _b : [];
       const presence_enabled = !!this.bindings[REALTIME_LISTEN_TYPES.PRESENCE] && this.bindings[REALTIME_LISTEN_TYPES.PRESENCE].length > 0 || ((_c = this.params.config.presence) === null || _c === void 0 ? void 0 : _c.enabled) === true;
       const accessTokenPayload = {};
       const config = {
@@ -4936,14 +4936,14 @@ var RealtimeChannel = class _RealtimeChannel {
       this.joinedOnce = true;
       this._rejoin(timeout);
       this.joinPush.receive("ok", async ({ postgres_changes: postgres_changes2 }) => {
-        var _a5;
+        var _a6;
         this.socket.setAuth();
         if (postgres_changes2 === void 0) {
           callback === null || callback === void 0 ? void 0 : callback(REALTIME_SUBSCRIBE_STATES.SUBSCRIBED);
           return;
         } else {
           const clientPostgresBindings = this.bindings.postgres_changes;
-          const bindingsLen = (_a5 = clientPostgresBindings === null || clientPostgresBindings === void 0 ? void 0 : clientPostgresBindings.length) !== null && _a5 !== void 0 ? _a5 : 0;
+          const bindingsLen = (_a6 = clientPostgresBindings === null || clientPostgresBindings === void 0 ? void 0 : clientPostgresBindings.length) !== null && _a6 !== void 0 ? _a6 : 0;
           const newPostgresBindings = [];
           for (let i = 0; i < bindingsLen; i++) {
             const clientPostgresBinding = clientPostgresBindings[i];
@@ -5021,7 +5021,7 @@ var RealtimeChannel = class _RealtimeChannel {
    * @returns Promise resolving to object with success status, and error details if failed
    */
   async httpSend(event, payload, opts = {}) {
-    var _a4;
+    var _a5;
     const authorization = this.socket.accessTokenValue ? `Bearer ${this.socket.accessTokenValue}` : "";
     if (payload === void 0 || payload === null) {
       return Promise.reject("Payload is required for httpSend()");
@@ -5044,7 +5044,7 @@ var RealtimeChannel = class _RealtimeChannel {
         ]
       })
     };
-    const response = await this._fetchWithTimeout(this.broadcastEndpointURL, options, (_a4 = opts.timeout) !== null && _a4 !== void 0 ? _a4 : this.timeout);
+    const response = await this._fetchWithTimeout(this.broadcastEndpointURL, options, (_a5 = opts.timeout) !== null && _a5 !== void 0 ? _a5 : this.timeout);
     if (response.status === 202) {
       return { success: true };
     }
@@ -5066,7 +5066,7 @@ var RealtimeChannel = class _RealtimeChannel {
    * @param opts Options to be used during the send process
    */
   async send(args, opts = {}) {
-    var _a4, _b;
+    var _a5, _b;
     if (!this._canPush() && args.type === "broadcast") {
       console.warn("Realtime send() is automatically falling back to REST API. This behavior will be deprecated in the future. Please use httpSend() explicitly for REST delivery.");
       const { event, payload: endpoint_payload } = args;
@@ -5090,7 +5090,7 @@ var RealtimeChannel = class _RealtimeChannel {
         })
       };
       try {
-        const response = await this._fetchWithTimeout(this.broadcastEndpointURL, options, (_a4 = opts.timeout) !== null && _a4 !== void 0 ? _a4 : this.timeout);
+        const response = await this._fetchWithTimeout(this.broadcastEndpointURL, options, (_a5 = opts.timeout) !== null && _a5 !== void 0 ? _a5 : this.timeout);
         await ((_b = response.body) === null || _b === void 0 ? void 0 : _b.cancel());
         return response.ok ? "ok" : "error";
       } catch (error) {
@@ -5102,9 +5102,9 @@ var RealtimeChannel = class _RealtimeChannel {
       }
     } else {
       return new Promise((resolve) => {
-        var _a5, _b2, _c;
+        var _a6, _b2, _c;
         const push = this._push(args.type, args, opts.timeout || this.timeout);
-        if (args.type === "broadcast" && !((_c = (_b2 = (_a5 = this.params) === null || _a5 === void 0 ? void 0 : _a5.config) === null || _b2 === void 0 ? void 0 : _b2.broadcast) === null || _c === void 0 ? void 0 : _c.ack)) {
+        if (args.type === "broadcast" && !((_c = (_b2 = (_a6 = this.params) === null || _a6 === void 0 ? void 0 : _a6.config) === null || _b2 === void 0 ? void 0 : _b2.broadcast) === null || _c === void 0 ? void 0 : _c.ack)) {
           resolve("ok");
         }
         push.receive("ok", () => resolve("ok"));
@@ -5223,7 +5223,7 @@ var RealtimeChannel = class _RealtimeChannel {
   }
   /** @internal */
   _trigger(type, payload, ref) {
-    var _a4, _b;
+    var _a5, _b;
     const typeLower = type.toLocaleLowerCase();
     const { close, error, leave, join } = CHANNEL_EVENTS;
     const events = [close, error, leave, join];
@@ -5235,17 +5235,17 @@ var RealtimeChannel = class _RealtimeChannel {
       throw "channel onMessage callbacks must return the payload, modified or unmodified";
     }
     if (["insert", "update", "delete"].includes(typeLower)) {
-      (_a4 = this.bindings.postgres_changes) === null || _a4 === void 0 ? void 0 : _a4.filter((bind) => {
-        var _a5, _b2, _c;
-        return ((_a5 = bind.filter) === null || _a5 === void 0 ? void 0 : _a5.event) === "*" || ((_c = (_b2 = bind.filter) === null || _b2 === void 0 ? void 0 : _b2.event) === null || _c === void 0 ? void 0 : _c.toLocaleLowerCase()) === typeLower;
+      (_a5 = this.bindings.postgres_changes) === null || _a5 === void 0 ? void 0 : _a5.filter((bind) => {
+        var _a6, _b2, _c;
+        return ((_a6 = bind.filter) === null || _a6 === void 0 ? void 0 : _a6.event) === "*" || ((_c = (_b2 = bind.filter) === null || _b2 === void 0 ? void 0 : _b2.event) === null || _c === void 0 ? void 0 : _c.toLocaleLowerCase()) === typeLower;
       }).map((bind) => bind.callback(handledPayload, ref));
     } else {
       (_b = this.bindings[typeLower]) === null || _b === void 0 ? void 0 : _b.filter((bind) => {
-        var _a5, _b2, _c, _d, _e, _f;
+        var _a6, _b2, _c, _d, _e, _f;
         if (["broadcast", "presence", "postgres_changes"].includes(typeLower)) {
           if ("id" in bind) {
             const bindId = bind.id;
-            const bindEvent = (_a5 = bind.filter) === null || _a5 === void 0 ? void 0 : _a5.event;
+            const bindEvent = (_a6 = bind.filter) === null || _a6 === void 0 ? void 0 : _a6.event;
             return bindId && ((_b2 = payload.ids) === null || _b2 === void 0 ? void 0 : _b2.includes(bindId)) && (bindEvent === "*" || (bindEvent === null || bindEvent === void 0 ? void 0 : bindEvent.toLocaleLowerCase()) === ((_c = payload.data) === null || _c === void 0 ? void 0 : _c.type.toLocaleLowerCase()));
           } else {
             const bindEvent = (_e = (_d = bind === null || bind === void 0 ? void 0 : bind.filter) === null || _d === void 0 ? void 0 : _d.event) === null || _e === void 0 ? void 0 : _e.toLocaleLowerCase();
@@ -5313,8 +5313,8 @@ var RealtimeChannel = class _RealtimeChannel {
     const typeLower = type.toLocaleLowerCase();
     if (this.bindings[typeLower]) {
       this.bindings[typeLower] = this.bindings[typeLower].filter((bind) => {
-        var _a4;
-        return !(((_a4 = bind.type) === null || _a4 === void 0 ? void 0 : _a4.toLocaleLowerCase()) === typeLower && _RealtimeChannel.isEqual(bind.filter, filter));
+        var _a5;
+        return !(((_a5 = bind.type) === null || _a5 === void 0 ? void 0 : _a5.toLocaleLowerCase()) === typeLower && _RealtimeChannel.isEqual(bind.filter, filter));
       });
     }
     return this;
@@ -5436,7 +5436,7 @@ var RealtimeClient = class {
    * ```
    */
   constructor(endPoint, options) {
-    var _a4;
+    var _a5;
     this.accessTokenValue = null;
     this.apiKey = null;
     this.channels = new Array();
@@ -5473,7 +5473,7 @@ var RealtimeClient = class {
       }
       return (...args) => fetch(...args);
     };
-    if (!((_a4 = options === null || options === void 0 ? void 0 : options.params) === null || _a4 === void 0 ? void 0 : _a4.apikey)) {
+    if (!((_a5 = options === null || options === void 0 ? void 0 : options.params) === null || _a5 === void 0 ? void 0 : _a5.apikey)) {
       throw new Error("API key is required to connect to Realtime");
     }
     this.apiKey = options.params.apikey;
@@ -5655,8 +5655,8 @@ Option 2: Install and provide the "ws" package:
     const { topic, event, payload, ref } = data;
     const callback = /* @__PURE__ */ __name(() => {
       this.encode(data, (result) => {
-        var _a4;
-        (_a4 = this.conn) === null || _a4 === void 0 ? void 0 : _a4.send(result);
+        var _a5;
+        (_a5 = this.conn) === null || _a5 === void 0 ? void 0 : _a5.send(result);
       });
     }, "callback");
     this.log("push", `${topic} ${event} (${ref})`, payload);
@@ -5687,7 +5687,7 @@ Option 2: Install and provide the "ws" package:
    * Sends a heartbeat message if the socket is connected.
    */
   async sendHeartbeat() {
-    var _a4;
+    var _a5;
     if (!this.isConnected()) {
       try {
         this.heartbeatCallback("disconnected");
@@ -5705,11 +5705,11 @@ Option 2: Install and provide the "ws" package:
         this.log("error", "error in heartbeat callback", e);
       }
       this._wasManualDisconnect = false;
-      (_a4 = this.conn) === null || _a4 === void 0 ? void 0 : _a4.close(WS_CLOSE_NORMAL, "heartbeat timeout");
+      (_a5 = this.conn) === null || _a5 === void 0 ? void 0 : _a5.close(WS_CLOSE_NORMAL, "heartbeat timeout");
       setTimeout(() => {
-        var _a5;
+        var _a6;
         if (!this.isConnected()) {
-          (_a5 = this.reconnectTimer) === null || _a5 === void 0 ? void 0 : _a5.scheduleTimeout();
+          (_a6 = this.reconnectTimer) === null || _a6 === void 0 ? void 0 : _a6.scheduleTimeout();
         }
       }, CONNECTION_TIMEOUTS.HEARTBEAT_TIMEOUT_FALLBACK);
       return;
@@ -5806,12 +5806,12 @@ Option 2: Install and provide the "ws" package:
    * @internal
    */
   _clearTimer(timer) {
-    var _a4;
+    var _a5;
     if (timer === "heartbeat" && this.heartbeatTimer) {
       clearInterval(this.heartbeatTimer);
       this.heartbeatTimer = void 0;
     } else if (timer === "reconnect") {
-      (_a4 = this.reconnectTimer) === null || _a4 === void 0 ? void 0 : _a4.reset();
+      (_a5 = this.reconnectTimer) === null || _a5 === void 0 ? void 0 : _a5.reset();
     }
   }
   /**
@@ -5911,13 +5911,13 @@ Option 2: Install and provide the "ws" package:
   }
   /** @internal */
   _onConnClose(event) {
-    var _a4;
+    var _a5;
     this._setConnectionState("disconnected");
     this.log("transport", "close", event);
     this._triggerChanError();
     this._clearTimer("heartbeat");
     if (!this._wasManualDisconnect) {
-      (_a4 = this.reconnectTimer) === null || _a4 === void 0 ? void 0 : _a4.scheduleTimeout();
+      (_a5 = this.reconnectTimer) === null || _a5 === void 0 ? void 0 : _a5.scheduleTimeout();
     }
     this._triggerStateCallbacks("close", event);
   }
@@ -6046,8 +6046,8 @@ Option 2: Install and provide the "ws" package:
    * @internal
    */
   _initializeOptions(options) {
-    var _a4, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l, _m;
-    this.transport = (_a4 = options === null || options === void 0 ? void 0 : options.transport) !== null && _a4 !== void 0 ? _a4 : null;
+    var _a5, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l, _m;
+    this.transport = (_a5 = options === null || options === void 0 ? void 0 : options.transport) !== null && _a5 !== void 0 ? _a5 : null;
     this.timeout = (_b = options === null || options === void 0 ? void 0 : options.timeout) !== null && _b !== void 0 ? _b : DEFAULT_TIMEOUT;
     this.heartbeatIntervalMs = (_c = options === null || options === void 0 ? void 0 : options.heartbeatIntervalMs) !== null && _c !== void 0 ? _c : CONNECTION_TIMEOUTS.HEARTBEAT_INTERVAL;
     this.worker = (_d = options === null || options === void 0 ? void 0 : options.worker) !== null && _d !== void 0 ? _d : false;
@@ -6188,8 +6188,8 @@ var isPlainObject = /* @__PURE__ */ __name((value) => {
 
 // node_modules/@supabase/storage-js/dist/module/lib/fetch.js
 var _getErrorMessage = /* @__PURE__ */ __name((err) => {
-  var _a4;
-  return err.msg || err.message || err.error_description || (typeof err.error === "string" ? err.error : (_a4 = err.error) === null || _a4 === void 0 ? void 0 : _a4.message) || JSON.stringify(err);
+  var _a5;
+  return err.msg || err.message || err.error_description || (typeof err.error === "string" ? err.error : (_a5 = err.error) === null || _a5 === void 0 ? void 0 : _a5.message) || JSON.stringify(err);
 }, "_getErrorMessage");
 var handleError = /* @__PURE__ */ __name((error, reject, options) => __awaiter(void 0, void 0, void 0, function* () {
   const Res = yield resolveResponse();
@@ -9477,8 +9477,8 @@ var fetchWithAuth = /* @__PURE__ */ __name((supabaseKey, getAccessToken, customF
   const fetch2 = resolveFetch4(customFetch);
   const HeadersConstructor = resolveHeadersConstructor();
   return async (input, init) => {
-    var _a4;
-    const accessToken = (_a4 = await getAccessToken()) !== null && _a4 !== void 0 ? _a4 : supabaseKey;
+    var _a5;
+    const accessToken = (_a5 = await getAccessToken()) !== null && _a5 !== void 0 ? _a5 : supabaseKey;
     let headers = new HeadersConstructor(init === null || init === void 0 ? void 0 : init.headers);
     if (!headers.has("apikey")) {
       headers.set("apikey", supabaseKey);
@@ -9498,7 +9498,7 @@ function ensureTrailingSlash(url) {
 }
 __name(ensureTrailingSlash, "ensureTrailingSlash");
 function applySettingDefaults(options, defaults) {
-  var _a4, _b;
+  var _a5, _b;
   const { db: dbOptions, auth: authOptions, realtime: realtimeOptions, global: globalOptions } = options;
   const { db: DEFAULT_DB_OPTIONS2, auth: DEFAULT_AUTH_OPTIONS2, realtime: DEFAULT_REALTIME_OPTIONS2, global: DEFAULT_GLOBAL_OPTIONS2 } = defaults;
   const result = {
@@ -9506,7 +9506,7 @@ function applySettingDefaults(options, defaults) {
     auth: Object.assign(Object.assign({}, DEFAULT_AUTH_OPTIONS2), authOptions),
     realtime: Object.assign(Object.assign({}, DEFAULT_REALTIME_OPTIONS2), realtimeOptions),
     storage: {},
-    global: Object.assign(Object.assign(Object.assign({}, DEFAULT_GLOBAL_OPTIONS2), globalOptions), { headers: Object.assign(Object.assign({}, (_a4 = DEFAULT_GLOBAL_OPTIONS2 === null || DEFAULT_GLOBAL_OPTIONS2 === void 0 ? void 0 : DEFAULT_GLOBAL_OPTIONS2.headers) !== null && _a4 !== void 0 ? _a4 : {}), (_b = globalOptions === null || globalOptions === void 0 ? void 0 : globalOptions.headers) !== null && _b !== void 0 ? _b : {}) }),
+    global: Object.assign(Object.assign(Object.assign({}, DEFAULT_GLOBAL_OPTIONS2), globalOptions), { headers: Object.assign(Object.assign({}, (_a5 = DEFAULT_GLOBAL_OPTIONS2 === null || DEFAULT_GLOBAL_OPTIONS2 === void 0 ? void 0 : DEFAULT_GLOBAL_OPTIONS2.headers) !== null && _a5 !== void 0 ? _a5 : {}), (_b = globalOptions === null || globalOptions === void 0 ? void 0 : globalOptions.headers) !== null && _b !== void 0 ? _b : {}) }),
     accessToken: /* @__PURE__ */ __name(async () => "", "accessToken")
   };
   if (options.accessToken) {
@@ -9527,7 +9527,7 @@ function validateSupabaseUrl(supabaseUrl) {
   }
   try {
     return new URL(ensureTrailingSlash(trimmedUrl));
-  } catch (_a4) {
+  } catch (_a5) {
     throw Error("Invalid supabaseUrl: Provided URL is malformed.");
   }
 }
@@ -9982,7 +9982,7 @@ var getItemAsync = /* @__PURE__ */ __name(async (storage, key) => {
   }
   try {
     return JSON.parse(value);
-  } catch (_a4) {
+  } catch (_a5) {
     return value;
   }
 }, "getItemAsync");
@@ -10211,7 +10211,7 @@ __name(deepClone, "deepClone");
 var _getErrorMessage3 = /* @__PURE__ */ __name((err) => err.msg || err.message || err.error_description || err.error || JSON.stringify(err), "_getErrorMessage");
 var NETWORK_ERROR_CODES = [502, 503, 504];
 async function handleError3(error) {
-  var _a4;
+  var _a5;
   if (!looksLikeFetchResponse(error)) {
     throw new AuthRetryableFetchError(_getErrorMessage3(error), 0);
   }
@@ -10236,7 +10236,7 @@ async function handleError3(error) {
       throw new AuthWeakPasswordError(_getErrorMessage3(data), error.status, data.weak_password.reasons);
     }
   } else if (errorCode === "weak_password") {
-    throw new AuthWeakPasswordError(_getErrorMessage3(data), error.status, ((_a4 = data.weak_password) === null || _a4 === void 0 ? void 0 : _a4.reasons) || []);
+    throw new AuthWeakPasswordError(_getErrorMessage3(data), error.status, ((_a5 = data.weak_password) === null || _a5 === void 0 ? void 0 : _a5.reasons) || []);
   } else if (errorCode === "session_not_found") {
     throw new AuthSessionMissingError();
   }
@@ -10253,7 +10253,7 @@ var _getRequestParams3 = /* @__PURE__ */ __name((method, options, parameters, bo
   return Object.assign(Object.assign({}, params), parameters);
 }, "_getRequestParams");
 async function _request(fetcher, method, url, options) {
-  var _a4;
+  var _a5;
   const headers = Object.assign({}, options === null || options === void 0 ? void 0 : options.headers);
   if (!headers[API_VERSION_HEADER_NAME]) {
     headers[API_VERSION_HEADER_NAME] = API_VERSIONS["2024-01-01"].name;
@@ -10261,7 +10261,7 @@ async function _request(fetcher, method, url, options) {
   if (options === null || options === void 0 ? void 0 : options.jwt) {
     headers["Authorization"] = `Bearer ${options.jwt}`;
   }
-  const qs = (_a4 = options === null || options === void 0 ? void 0 : options.query) !== null && _a4 !== void 0 ? _a4 : {};
+  const qs = (_a5 = options === null || options === void 0 ? void 0 : options.query) !== null && _a5 !== void 0 ? _a5 : {};
   if (options === null || options === void 0 ? void 0 : options.redirectTo) {
     qs["redirect_to"] = options.redirectTo;
   }
@@ -10296,7 +10296,7 @@ async function _handleRequest3(fetcher, method, url, options, parameters, body) 
 }
 __name(_handleRequest3, "_handleRequest");
 function _sessionResponse(data) {
-  var _a4;
+  var _a5;
   let session = null;
   if (hasSession(data)) {
     session = Object.assign({}, data);
@@ -10304,7 +10304,7 @@ function _sessionResponse(data) {
       session.expires_at = expiresAt(data.expires_in);
     }
   }
-  const user = (_a4 = data.user) !== null && _a4 !== void 0 ? _a4 : data;
+  const user = (_a5 = data.user) !== null && _a5 !== void 0 ? _a5 : data;
   return { data: { session, user }, error: null };
 }
 __name(_sessionResponse, "_sessionResponse");
@@ -10317,8 +10317,8 @@ function _sessionResponsePassword(data) {
 }
 __name(_sessionResponsePassword, "_sessionResponsePassword");
 function _userResponse(data) {
-  var _a4;
-  const user = (_a4 = data.user) !== null && _a4 !== void 0 ? _a4 : data;
+  var _a5;
+  const user = (_a5 = data.user) !== null && _a5 !== void 0 ? _a5 : data;
   return { data: { user }, error: null };
 }
 __name(_userResponse, "_userResponse");
@@ -10497,14 +10497,14 @@ var GoTrueAdminApi = class {
    * @param params An object which supports `page` and `perPage` as numbers, to alter the paginated results.
    */
   async listUsers(params) {
-    var _a4, _b, _c, _d, _e, _f, _g;
+    var _a5, _b, _c, _d, _e, _f, _g;
     try {
       const pagination = { nextPage: null, lastPage: 0, total: 0 };
       const response = await _request(this.fetch, "GET", `${this.url}/admin/users`, {
         headers: this.headers,
         noResolveJson: true,
         query: {
-          page: (_b = (_a4 = params === null || params === void 0 ? void 0 : params.page) === null || _a4 === void 0 ? void 0 : _a4.toString()) !== null && _b !== void 0 ? _b : "",
+          page: (_b = (_a5 = params === null || params === void 0 ? void 0 : params.page) === null || _a5 === void 0 ? void 0 : _a5.toString()) !== null && _b !== void 0 ? _b : "",
           per_page: (_d = (_c = params === null || params === void 0 ? void 0 : params.perPage) === null || _c === void 0 ? void 0 : _c.toString()) !== null && _d !== void 0 ? _d : ""
         },
         xform: _noResolveJsonResponse
@@ -10638,14 +10638,14 @@ var GoTrueAdminApi = class {
    * This function should only be called on a server. Never expose your `service_role` key in the browser.
    */
   async _listOAuthClients(params) {
-    var _a4, _b, _c, _d, _e, _f, _g;
+    var _a5, _b, _c, _d, _e, _f, _g;
     try {
       const pagination = { nextPage: null, lastPage: 0, total: 0 };
       const response = await _request(this.fetch, "GET", `${this.url}/admin/oauth/clients`, {
         headers: this.headers,
         noResolveJson: true,
         query: {
-          page: (_b = (_a4 = params === null || params === void 0 ? void 0 : params.page) === null || _a4 === void 0 ? void 0 : _a4.toString()) !== null && _b !== void 0 ? _b : "",
+          page: (_b = (_a5 = params === null || params === void 0 ? void 0 : params.page) === null || _a5 === void 0 ? void 0 : _a5.toString()) !== null && _b !== void 0 ? _b : "",
           per_page: (_d = (_c = params === null || params === void 0 ? void 0 : params.perPage) === null || _c === void 0 ? void 0 : _c.toString()) !== null && _d !== void 0 ? _d : ""
         },
         xform: _noResolveJsonResponse
@@ -10922,7 +10922,7 @@ function toHex(value) {
 }
 __name(toHex, "toHex");
 function createSiweMessage(parameters) {
-  var _a4;
+  var _a5;
   const { chainId, domain, expirationTime, issuedAt = /* @__PURE__ */ new Date(), nonce, notBefore, requestId, resources, scheme, uri, version: version5 } = parameters;
   {
     if (!Number.isInteger(chainId))
@@ -10935,7 +10935,7 @@ function createSiweMessage(parameters) {
       throw new Error(`@supabase/auth-js: Invalid SIWE message field "uri". URI must be provided.`);
     if (version5 !== "1")
       throw new Error(`@supabase/auth-js: Invalid SIWE message field "version". Version must be '1'. Provided value: ${version5}`);
-    if ((_a4 = parameters.statement) === null || _a4 === void 0 ? void 0 : _a4.includes("\n"))
+    if ((_a5 = parameters.statement) === null || _a5 === void 0 ? void 0 : _a5.includes("\n"))
       throw new Error(`@supabase/auth-js: Invalid SIWE message field "statement". Statement must not include '\\n'. Provided value: ${parameters.statement}`);
   }
   const address = getAddress(parameters.address);
@@ -10987,10 +10987,10 @@ var WebAuthnError = class extends Error {
     __name(this, "WebAuthnError");
   }
   constructor({ message, code, cause, name }) {
-    var _a4;
+    var _a5;
     super(message, { cause });
     this.__isWebAuthnError = true;
-    this.name = (_a4 = name !== null && name !== void 0 ? name : cause instanceof Error ? cause.name : void 0) !== null && _a4 !== void 0 ? _a4 : "Unknown Error";
+    this.name = (_a5 = name !== null && name !== void 0 ? name : cause instanceof Error ? cause.name : void 0) !== null && _a5 !== void 0 ? _a5 : "Unknown Error";
     this.code = code;
   }
 };
@@ -11009,7 +11009,7 @@ var WebAuthnUnknownError = class extends WebAuthnError {
   }
 };
 function identifyRegistrationError({ error, options }) {
-  var _a4, _b, _c;
+  var _a5, _b, _c;
   const { publicKey } = options;
   if (!publicKey) {
     throw Error("options was missing required publicKey property");
@@ -11023,7 +11023,7 @@ function identifyRegistrationError({ error, options }) {
       });
     }
   } else if (error.name === "ConstraintError") {
-    if (((_a4 = publicKey.authenticatorSelection) === null || _a4 === void 0 ? void 0 : _a4.requireResidentKey) === true) {
+    if (((_a5 = publicKey.authenticatorSelection) === null || _a5 === void 0 ? void 0 : _a5.requireResidentKey) === true) {
       return new WebAuthnError({
         message: "Discoverable credentials were required but no available authenticator supported it",
         code: "ERROR_AUTHENTICATOR_MISSING_DISCOVERABLE_CREDENTIAL_SUPPORT",
@@ -11259,7 +11259,7 @@ function deserializeCredentialRequestOptions(options) {
 }
 __name(deserializeCredentialRequestOptions, "deserializeCredentialRequestOptions");
 function serializeCredentialCreationResponse(credential) {
-  var _a4;
+  var _a5;
   if ("toJSON" in credential && typeof credential.toJSON === "function") {
     return credential.toJSON();
   }
@@ -11274,12 +11274,12 @@ function serializeCredentialCreationResponse(credential) {
     type: "public-key",
     clientExtensionResults: credential.getClientExtensionResults(),
     // Convert null to undefined and cast to AuthenticatorAttachment type
-    authenticatorAttachment: (_a4 = credentialWithAttachment.authenticatorAttachment) !== null && _a4 !== void 0 ? _a4 : void 0
+    authenticatorAttachment: (_a5 = credentialWithAttachment.authenticatorAttachment) !== null && _a5 !== void 0 ? _a5 : void 0
   };
 }
 __name(serializeCredentialCreationResponse, "serializeCredentialCreationResponse");
 function serializeCredentialRequestResponse(credential) {
-  var _a4;
+  var _a5;
   if ("toJSON" in credential && typeof credential.toJSON === "function") {
     return credential.toJSON();
   }
@@ -11299,7 +11299,7 @@ function serializeCredentialRequestResponse(credential) {
     type: "public-key",
     clientExtensionResults,
     // Convert null to undefined and cast to AuthenticatorAttachment type
-    authenticatorAttachment: (_a4 = credentialWithAttachment.authenticatorAttachment) !== null && _a4 !== void 0 ? _a4 : void 0
+    authenticatorAttachment: (_a5 = credentialWithAttachment.authenticatorAttachment) !== null && _a5 !== void 0 ? _a5 : void 0
   };
 }
 __name(serializeCredentialRequestResponse, "serializeCredentialRequestResponse");
@@ -11311,8 +11311,8 @@ function isValidDomain(hostname) {
 }
 __name(isValidDomain, "isValidDomain");
 function browserSupportsWebAuthn() {
-  var _a4, _b;
-  return !!(isBrowser() && "PublicKeyCredential" in window && window.PublicKeyCredential && "credentials" in navigator && typeof ((_a4 = navigator === null || navigator === void 0 ? void 0 : navigator.credentials) === null || _a4 === void 0 ? void 0 : _a4.create) === "function" && typeof ((_b = navigator === null || navigator === void 0 ? void 0 : navigator.credentials) === null || _b === void 0 ? void 0 : _b.get) === "function");
+  var _a5, _b;
+  return !!(isBrowser() && "PublicKeyCredential" in window && window.PublicKeyCredential && "credentials" in navigator && typeof ((_a5 = navigator === null || navigator === void 0 ? void 0 : navigator.credentials) === null || _a5 === void 0 ? void 0 : _a5.create) === "function" && typeof ((_b = navigator === null || navigator === void 0 ? void 0 : navigator.credentials) === null || _b === void 0 ? void 0 : _b.get) === "function");
 }
 __name(browserSupportsWebAuthn, "browserSupportsWebAuthn");
 async function createCredential(options) {
@@ -11650,8 +11650,8 @@ var WebAuthnApi = class {
       });
       if (!factor) {
         await this.client.mfa.listFactors().then((factors) => {
-          var _a4;
-          return (_a4 = factors.data) === null || _a4 === void 0 ? void 0 : _a4.all.find((v) => v.factor_type === "webauthn" && v.friendly_name === friendlyName && v.status !== "unverified");
+          var _a5;
+          return (_a5 = factors.data) === null || _a5 === void 0 ? void 0 : _a5.all.find((v) => v.factor_type === "webauthn" && v.friendly_name === friendlyName && v.status !== "unverified");
         }).then((factor2) => factor2 ? this.client.mfa.unenroll({ factorId: factor2 === null || factor2 === void 0 ? void 0 : factor2.id }) : void 0);
         return { data: null, error: enrollError };
       }
@@ -11715,15 +11715,15 @@ var GoTrueClient = class _GoTrueClient {
    * The JWKS used for verifying asymmetric JWTs
    */
   get jwks() {
-    var _a4, _b;
-    return (_b = (_a4 = GLOBAL_JWKS[this.storageKey]) === null || _a4 === void 0 ? void 0 : _a4.jwks) !== null && _b !== void 0 ? _b : { keys: [] };
+    var _a5, _b;
+    return (_b = (_a5 = GLOBAL_JWKS[this.storageKey]) === null || _a5 === void 0 ? void 0 : _a5.jwks) !== null && _b !== void 0 ? _b : { keys: [] };
   }
   set jwks(value) {
     GLOBAL_JWKS[this.storageKey] = Object.assign(Object.assign({}, GLOBAL_JWKS[this.storageKey]), { jwks: value });
   }
   get jwks_cached_at() {
-    var _a4, _b;
-    return (_b = (_a4 = GLOBAL_JWKS[this.storageKey]) === null || _a4 === void 0 ? void 0 : _a4.cachedAt) !== null && _b !== void 0 ? _b : Number.MIN_SAFE_INTEGER;
+    var _a5, _b;
+    return (_b = (_a5 = GLOBAL_JWKS[this.storageKey]) === null || _a5 === void 0 ? void 0 : _a5.cachedAt) !== null && _b !== void 0 ? _b : Number.MIN_SAFE_INTEGER;
   }
   set jwks_cached_at(value) {
     GLOBAL_JWKS[this.storageKey] = Object.assign(Object.assign({}, GLOBAL_JWKS[this.storageKey]), { cachedAt: value });
@@ -11743,7 +11743,7 @@ var GoTrueClient = class _GoTrueClient {
    * ```
    */
   constructor(options) {
-    var _a4, _b, _c;
+    var _a5, _b, _c;
     this.userStorage = null;
     this.memoryStorage = null;
     this.stateChangeEmitters = /* @__PURE__ */ new Map();
@@ -11760,7 +11760,7 @@ var GoTrueClient = class _GoTrueClient {
     this.logger = console.log;
     const settings = Object.assign(Object.assign({}, DEFAULT_OPTIONS), options);
     this.storageKey = settings.storageKey;
-    this.instanceID = (_a4 = _GoTrueClient.nextInstanceID[this.storageKey]) !== null && _a4 !== void 0 ? _a4 : 0;
+    this.instanceID = (_a5 = _GoTrueClient.nextInstanceID[this.storageKey]) !== null && _a5 !== void 0 ? _a5 : 0;
     _GoTrueClient.nextInstanceID[this.storageKey] = this.instanceID + 1;
     this.logDebugMessages = !!settings.debug;
     if (typeof settings.debug === "function") {
@@ -11896,7 +11896,7 @@ var GoTrueClient = class _GoTrueClient {
    *    the whole lifetime of the client
    */
   async _initialize() {
-    var _a4;
+    var _a5;
     try {
       let params = {};
       let callbackUrlType = "none";
@@ -11913,7 +11913,7 @@ var GoTrueClient = class _GoTrueClient {
         if (error) {
           this._debug("#_initialize()", "error detecting session from URL", error);
           if (isAuthImplicitGrantRedirectError(error)) {
-            const errorCode = (_a4 = error.details) === null || _a4 === void 0 ? void 0 : _a4.code;
+            const errorCode = (_a5 = error.details) === null || _a5 === void 0 ? void 0 : _a5.code;
             if (errorCode === "identity_already_exists" || errorCode === "identity_not_found" || errorCode === "single_identity_not_deletable") {
               return { error };
             }
@@ -11953,12 +11953,12 @@ var GoTrueClient = class _GoTrueClient {
    * @returns A session where the is_anonymous claim in the access token JWT set to true
    */
   async signInAnonymously(credentials) {
-    var _a4, _b, _c;
+    var _a5, _b, _c;
     try {
       const res = await _request(this.fetch, "POST", `${this.url}/signup`, {
         headers: this.headers,
         body: {
-          data: (_b = (_a4 = credentials === null || credentials === void 0 ? void 0 : credentials.options) === null || _a4 === void 0 ? void 0 : _a4.data) !== null && _b !== void 0 ? _b : {},
+          data: (_b = (_a5 = credentials === null || credentials === void 0 ? void 0 : credentials.options) === null || _a5 === void 0 ? void 0 : _a5.data) !== null && _b !== void 0 ? _b : {},
           gotrue_meta_security: { captcha_token: (_c = credentials === null || credentials === void 0 ? void 0 : credentials.options) === null || _c === void 0 ? void 0 : _c.captchaToken }
         },
         xform: _sessionResponse
@@ -11992,7 +11992,7 @@ var GoTrueClient = class _GoTrueClient {
    * @returns A user if the server has "autoconfirm" OFF
    */
   async signUp(credentials) {
-    var _a4, _b, _c;
+    var _a5, _b, _c;
     try {
       let res;
       if ("email" in credentials) {
@@ -12009,7 +12009,7 @@ var GoTrueClient = class _GoTrueClient {
           body: {
             email,
             password,
-            data: (_a4 = options === null || options === void 0 ? void 0 : options.data) !== null && _a4 !== void 0 ? _a4 : {},
+            data: (_a5 = options === null || options === void 0 ? void 0 : options.data) !== null && _a5 !== void 0 ? _a5 : {},
             gotrue_meta_security: { captcha_token: options === null || options === void 0 ? void 0 : options.captchaToken },
             code_challenge: codeChallenge,
             code_challenge_method: codeChallengeMethod
@@ -12113,9 +12113,9 @@ var GoTrueClient = class _GoTrueClient {
    * This method supports the PKCE flow.
    */
   async signInWithOAuth(credentials) {
-    var _a4, _b, _c, _d;
+    var _a5, _b, _c, _d;
     return await this._handleProviderSignIn(credentials.provider, {
-      redirectTo: (_a4 = credentials.options) === null || _a4 === void 0 ? void 0 : _a4.redirectTo,
+      redirectTo: (_a5 = credentials.options) === null || _a5 === void 0 ? void 0 : _a5.redirectTo,
       scopes: (_b = credentials.options) === null || _b === void 0 ? void 0 : _b.scopes,
       queryParams: (_c = credentials.options) === null || _c === void 0 ? void 0 : _c.queryParams,
       skipBrowserRedirect: (_d = credentials.options) === null || _d === void 0 ? void 0 : _d.skipBrowserRedirect
@@ -12149,7 +12149,7 @@ var GoTrueClient = class _GoTrueClient {
     }
   }
   async signInWithEthereum(credentials) {
-    var _a4, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l;
+    var _a5, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l;
     let message;
     let signature;
     if ("message" in credentials) {
@@ -12173,7 +12173,7 @@ var GoTrueClient = class _GoTrueClient {
           throw new Error(`@supabase/auth-js: No compatible Ethereum wallet interface on the window object (window.ethereum) detected. Make sure the user already has a wallet installed and connected for this app. Prefer passing the wallet interface object directly to signInWithWeb3({ chain: 'ethereum', wallet: resolvedUserWallet }) instead.`);
         }
       }
-      const url = new URL((_a4 = options === null || options === void 0 ? void 0 : options.url) !== null && _a4 !== void 0 ? _a4 : window.location.href);
+      const url = new URL((_a5 = options === null || options === void 0 ? void 0 : options.url) !== null && _a5 !== void 0 ? _a5 : window.location.href);
       const accounts = await resolvedWallet.request({
         method: "eth_requestAccounts"
       }).then((accs) => accs).catch(() => {
@@ -12240,7 +12240,7 @@ var GoTrueClient = class _GoTrueClient {
     }
   }
   async signInWithSolana(credentials) {
-    var _a4, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l, _m;
+    var _a5, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l, _m;
     let message;
     let signature;
     if ("message" in credentials) {
@@ -12264,7 +12264,7 @@ var GoTrueClient = class _GoTrueClient {
           throw new Error(`@supabase/auth-js: No compatible Solana wallet interface on the window object (window.solana) detected. Make sure the user already has a wallet installed and connected for this app. Prefer passing the wallet interface object directly to signInWithWeb3({ chain: 'solana', wallet: resolvedUserWallet }) instead.`);
         }
       }
-      const url = new URL((_a4 = options === null || options === void 0 ? void 0 : options.url) !== null && _a4 !== void 0 ? _a4 : window.location.href);
+      const url = new URL((_a5 = options === null || options === void 0 ? void 0 : options.url) !== null && _a5 !== void 0 ? _a5 : window.location.href);
       if ("signIn" in resolvedWallet && resolvedWallet.signIn) {
         const output = await resolvedWallet.signIn(Object.assign(Object.assign(Object.assign({ issuedAt: (/* @__PURE__ */ new Date()).toISOString() }, options === null || options === void 0 ? void 0 : options.signInWithSolana), {
           // non-overridable properties
@@ -12432,7 +12432,7 @@ var GoTrueClient = class _GoTrueClient {
    * This method supports PKCE when an email is passed.
    */
   async signInWithOtp(credentials) {
-    var _a4, _b, _c, _d, _e;
+    var _a5, _b, _c, _d, _e;
     try {
       if ("email" in credentials) {
         const { email, options } = credentials;
@@ -12446,7 +12446,7 @@ var GoTrueClient = class _GoTrueClient {
           headers: this.headers,
           body: {
             email,
-            data: (_a4 = options === null || options === void 0 ? void 0 : options.data) !== null && _a4 !== void 0 ? _a4 : {},
+            data: (_a5 = options === null || options === void 0 ? void 0 : options.data) !== null && _a5 !== void 0 ? _a5 : {},
             create_user: (_b = options === null || options === void 0 ? void 0 : options.shouldCreateUser) !== null && _b !== void 0 ? _b : true,
             gotrue_meta_security: { captcha_token: options === null || options === void 0 ? void 0 : options.captchaToken },
             code_challenge: codeChallenge,
@@ -12485,12 +12485,12 @@ var GoTrueClient = class _GoTrueClient {
    * Log in a user given a User supplied OTP or TokenHash received through mobile or email.
    */
   async verifyOtp(params) {
-    var _a4, _b;
+    var _a5, _b;
     try {
       let redirectTo = void 0;
       let captchaToken = void 0;
       if ("options" in params) {
-        redirectTo = (_a4 = params.options) === null || _a4 === void 0 ? void 0 : _a4.redirectTo;
+        redirectTo = (_a5 = params.options) === null || _a5 === void 0 ? void 0 : _a5.redirectTo;
         captchaToken = (_b = params.options) === null || _b === void 0 ? void 0 : _b.captchaToken;
       }
       const { data, error } = await _request(this.fetch, "POST", `${this.url}/verify`, {
@@ -12535,7 +12535,7 @@ var GoTrueClient = class _GoTrueClient {
    * organization's SSO Identity Provider UUID directly instead.
    */
   async signInWithSSO(params) {
-    var _a4, _b, _c, _d, _e;
+    var _a5, _b, _c, _d, _e;
     try {
       let codeChallenge = null;
       let codeChallengeMethod = null;
@@ -12544,7 +12544,7 @@ var GoTrueClient = class _GoTrueClient {
         [codeChallenge, codeChallengeMethod] = await getCodeChallengeAndMethod(this.storage, this.storageKey);
       }
       const result = await _request(this.fetch, "POST", `${this.url}/sso`, {
-        body: Object.assign(Object.assign(Object.assign(Object.assign(Object.assign({}, "providerId" in params ? { provider_id: params.providerId } : null), "domain" in params ? { domain: params.domain } : null), { redirect_to: (_b = (_a4 = params.options) === null || _a4 === void 0 ? void 0 : _a4.redirectTo) !== null && _b !== void 0 ? _b : void 0 }), ((_c = params === null || params === void 0 ? void 0 : params.options) === null || _c === void 0 ? void 0 : _c.captchaToken) ? { gotrue_meta_security: { captcha_token: params.options.captchaToken } } : null), { skip_http_redirect: true, code_challenge: codeChallenge, code_challenge_method: codeChallengeMethod }),
+        body: Object.assign(Object.assign(Object.assign(Object.assign(Object.assign({}, "providerId" in params ? { provider_id: params.providerId } : null), "domain" in params ? { domain: params.domain } : null), { redirect_to: (_b = (_a5 = params.options) === null || _a5 === void 0 ? void 0 : _a5.redirectTo) !== null && _b !== void 0 ? _b : void 0 }), ((_c = params === null || params === void 0 ? void 0 : params.options) === null || _c === void 0 ? void 0 : _c.captchaToken) ? { gotrue_meta_security: { captcha_token: params.options.captchaToken } } : null), { skip_http_redirect: true, code_challenge: codeChallenge, code_challenge_method: codeChallengeMethod }),
         headers: this.headers,
         xform: _ssoResponse
       });
@@ -12794,12 +12794,12 @@ var GoTrueClient = class _GoTrueClient {
         });
       }
       return await this._useSession(async (result) => {
-        var _a4, _b, _c;
+        var _a5, _b, _c;
         const { data, error } = result;
         if (error) {
           throw error;
         }
-        if (!((_a4 = data.session) === null || _a4 === void 0 ? void 0 : _a4.access_token) && !this.hasCustomAuthorizationHeader) {
+        if (!((_a5 = data.session) === null || _a5 === void 0 ? void 0 : _a5.access_token) && !this.hasCustomAuthorizationHeader) {
           return { data: { user: null }, error: new AuthSessionMissingError() };
         }
         return await _request(this.fetch, "GET", `${this.url}/user`, {
@@ -12940,13 +12940,13 @@ var GoTrueClient = class _GoTrueClient {
   async _refreshSession(currentSession) {
     try {
       return await this._useSession(async (result) => {
-        var _a4;
+        var _a5;
         if (!currentSession) {
           const { data, error: error2 } = result;
           if (error2) {
             throw error2;
           }
-          currentSession = (_a4 = data.session) !== null && _a4 !== void 0 ? _a4 : void 0;
+          currentSession = (_a5 = data.session) !== null && _a5 !== void 0 ? _a5 : void 0;
         }
         if (!(currentSession === null || currentSession === void 0 ? void 0 : currentSession.refresh_token)) {
           throw new AuthSessionMissingError();
@@ -13077,12 +13077,12 @@ var GoTrueClient = class _GoTrueClient {
   }
   async _signOut({ scope } = { scope: "global" }) {
     return await this._useSession(async (result) => {
-      var _a4;
+      var _a5;
       const { data, error: sessionError } = result;
       if (sessionError) {
         return this._returnResult({ error: sessionError });
       }
-      const accessToken = (_a4 = data.session) === null || _a4 === void 0 ? void 0 : _a4.access_token;
+      const accessToken = (_a5 = data.session) === null || _a5 === void 0 ? void 0 : _a5.access_token;
       if (accessToken) {
         const { error } = await this.admin.signOut(accessToken, scope);
         if (error) {
@@ -13120,12 +13120,12 @@ var GoTrueClient = class _GoTrueClient {
   }
   async _emitInitialSession(id) {
     return await this._useSession(async (result) => {
-      var _a4, _b;
+      var _a5, _b;
       try {
         const { data: { session }, error } = result;
         if (error)
           throw error;
-        await ((_a4 = this.stateChangeEmitters.get(id)) === null || _a4 === void 0 ? void 0 : _a4.callback("INITIAL_SESSION", session));
+        await ((_a5 = this.stateChangeEmitters.get(id)) === null || _a5 === void 0 ? void 0 : _a5.callback("INITIAL_SESSION", session));
         this._debug("INITIAL_SESSION", "callback id", id, "session", session);
       } catch (err) {
         await ((_b = this.stateChangeEmitters.get(id)) === null || _b === void 0 ? void 0 : _b.callback("INITIAL_SESSION", null));
@@ -13175,12 +13175,12 @@ var GoTrueClient = class _GoTrueClient {
    * Gets all the identities linked to a user.
    */
   async getUserIdentities() {
-    var _a4;
+    var _a5;
     try {
       const { data, error } = await this.getUser();
       if (error)
         throw error;
-      return this._returnResult({ data: { identities: (_a4 = data.user.identities) !== null && _a4 !== void 0 ? _a4 : [] }, error: null });
+      return this._returnResult({ data: { identities: (_a5 = data.user.identities) !== null && _a5 !== void 0 ? _a5 : [] }, error: null });
     } catch (error) {
       if (isAuthError(error)) {
         return this._returnResult({ data: null, error });
@@ -13195,15 +13195,15 @@ var GoTrueClient = class _GoTrueClient {
     return this.linkIdentityOAuth(credentials);
   }
   async linkIdentityOAuth(credentials) {
-    var _a4;
+    var _a5;
     try {
       const { data, error } = await this._useSession(async (result) => {
-        var _a5, _b, _c, _d, _e;
+        var _a6, _b, _c, _d, _e;
         const { data: data2, error: error2 } = result;
         if (error2)
           throw error2;
         const url = await this._getUrlForProvider(`${this.url}/user/identities/authorize`, credentials.provider, {
-          redirectTo: (_a5 = credentials.options) === null || _a5 === void 0 ? void 0 : _a5.redirectTo,
+          redirectTo: (_a6 = credentials.options) === null || _a6 === void 0 ? void 0 : _a6.redirectTo,
           scopes: (_b = credentials.options) === null || _b === void 0 ? void 0 : _b.scopes,
           queryParams: (_c = credentials.options) === null || _c === void 0 ? void 0 : _c.queryParams,
           skipBrowserRedirect: true
@@ -13215,7 +13215,7 @@ var GoTrueClient = class _GoTrueClient {
       });
       if (error)
         throw error;
-      if (isBrowser() && !((_a4 = credentials.options) === null || _a4 === void 0 ? void 0 : _a4.skipBrowserRedirect)) {
+      if (isBrowser() && !((_a5 = credentials.options) === null || _a5 === void 0 ? void 0 : _a5.skipBrowserRedirect)) {
         window.location.assign(data === null || data === void 0 ? void 0 : data.url);
       }
       return this._returnResult({
@@ -13231,7 +13231,7 @@ var GoTrueClient = class _GoTrueClient {
   }
   async linkIdentityIdToken(credentials) {
     return await this._useSession(async (result) => {
-      var _a4;
+      var _a5;
       try {
         const { error: sessionError, data: { session } } = result;
         if (sessionError)
@@ -13239,7 +13239,7 @@ var GoTrueClient = class _GoTrueClient {
         const { options, provider, token, access_token, nonce } = credentials;
         const res = await _request(this.fetch, "POST", `${this.url}/token?grant_type=id_token`, {
           headers: this.headers,
-          jwt: (_a4 = session === null || session === void 0 ? void 0 : session.access_token) !== null && _a4 !== void 0 ? _a4 : void 0,
+          jwt: (_a5 = session === null || session === void 0 ? void 0 : session.access_token) !== null && _a5 !== void 0 ? _a5 : void 0,
           body: {
             provider,
             id_token: token,
@@ -13278,14 +13278,14 @@ var GoTrueClient = class _GoTrueClient {
   async unlinkIdentity(identity) {
     try {
       return await this._useSession(async (result) => {
-        var _a4, _b;
+        var _a5, _b;
         const { data, error } = result;
         if (error) {
           throw error;
         }
         return await _request(this.fetch, "DELETE", `${this.url}/user/identities/${identity.identity_id}`, {
           headers: this.headers,
-          jwt: (_b = (_a4 = data.session) === null || _a4 === void 0 ? void 0 : _a4.access_token) !== null && _b !== void 0 ? _b : void 0
+          jwt: (_b = (_a5 = data.session) === null || _a5 === void 0 ? void 0 : _a5.access_token) !== null && _b !== void 0 ? _b : void 0
         });
       });
     } catch (error) {
@@ -13350,7 +13350,7 @@ var GoTrueClient = class _GoTrueClient {
    * Note: this method is async to accommodate for AsyncStorage e.g. in React native.
    */
   async _recoverAndRefresh() {
-    var _a4, _b;
+    var _a5, _b;
     const debugName = "#_recoverAndRefresh()";
     this._debug(debugName, "begin");
     try {
@@ -13361,7 +13361,7 @@ var GoTrueClient = class _GoTrueClient {
           maybeUser = { user: currentSession.user };
           await setItemAsync(this.userStorage, this.storageKey + "-user", maybeUser);
         }
-        currentSession.user = (_a4 = maybeUser === null || maybeUser === void 0 ? void 0 : maybeUser.user) !== null && _a4 !== void 0 ? _a4 : userNotAvailableProxy();
+        currentSession.user = (_a5 = maybeUser === null || maybeUser === void 0 ? void 0 : maybeUser.user) !== null && _a5 !== void 0 ? _a5 : userNotAvailableProxy();
       } else if (currentSession && !currentSession.user) {
         if (!currentSession.user) {
           const separateUser = await getItemAsync(this.storage, this.storageKey + "-user");
@@ -13421,7 +13421,7 @@ var GoTrueClient = class _GoTrueClient {
     }
   }
   async _callRefreshToken(refreshToken) {
-    var _a4, _b;
+    var _a5, _b;
     if (!refreshToken) {
       throw new AuthSessionMissingError();
     }
@@ -13449,7 +13449,7 @@ var GoTrueClient = class _GoTrueClient {
         if (!isAuthRetryableFetchError(error)) {
           await this._removeSession();
         }
-        (_a4 = this.refreshingDeferred) === null || _a4 === void 0 ? void 0 : _a4.resolve(result);
+        (_a5 = this.refreshingDeferred) === null || _a5 === void 0 ? void 0 : _a5.resolve(result);
         return result;
       }
       (_b = this.refreshingDeferred) === null || _b === void 0 ? void 0 : _b.reject(error);
@@ -13725,14 +13725,14 @@ var GoTrueClient = class _GoTrueClient {
   async _unenroll(params) {
     try {
       return await this._useSession(async (result) => {
-        var _a4;
+        var _a5;
         const { data: sessionData, error: sessionError } = result;
         if (sessionError) {
           return this._returnResult({ data: null, error: sessionError });
         }
         return await _request(this.fetch, "DELETE", `${this.url}/factors/${params.factorId}`, {
           headers: this.headers,
-          jwt: (_a4 = sessionData === null || sessionData === void 0 ? void 0 : sessionData.session) === null || _a4 === void 0 ? void 0 : _a4.access_token
+          jwt: (_a5 = sessionData === null || sessionData === void 0 ? void 0 : sessionData.session) === null || _a5 === void 0 ? void 0 : _a5.access_token
         });
       });
     } catch (error) {
@@ -13745,7 +13745,7 @@ var GoTrueClient = class _GoTrueClient {
   async _enroll(params) {
     try {
       return await this._useSession(async (result) => {
-        var _a4, _b;
+        var _a5, _b;
         const { data: sessionData, error: sessionError } = result;
         if (sessionError) {
           return this._returnResult({ data: null, error: sessionError });
@@ -13754,7 +13754,7 @@ var GoTrueClient = class _GoTrueClient {
         const { data, error } = await _request(this.fetch, "POST", `${this.url}/factors`, {
           body,
           headers: this.headers,
-          jwt: (_a4 = sessionData === null || sessionData === void 0 ? void 0 : sessionData.session) === null || _a4 === void 0 ? void 0 : _a4.access_token
+          jwt: (_a5 = sessionData === null || sessionData === void 0 ? void 0 : sessionData.session) === null || _a5 === void 0 ? void 0 : _a5.access_token
         });
         if (error) {
           return this._returnResult({ data: null, error });
@@ -13775,7 +13775,7 @@ var GoTrueClient = class _GoTrueClient {
     return this._acquireLock(-1, async () => {
       try {
         return await this._useSession(async (result) => {
-          var _a4;
+          var _a5;
           const { data: sessionData, error: sessionError } = result;
           if (sessionError) {
             return this._returnResult({ data: null, error: sessionError });
@@ -13786,7 +13786,7 @@ var GoTrueClient = class _GoTrueClient {
           const { data, error } = await _request(this.fetch, "POST", `${this.url}/factors/${params.factorId}/verify`, {
             body,
             headers: this.headers,
-            jwt: (_a4 = sessionData === null || sessionData === void 0 ? void 0 : sessionData.session) === null || _a4 === void 0 ? void 0 : _a4.access_token
+            jwt: (_a5 = sessionData === null || sessionData === void 0 ? void 0 : sessionData.session) === null || _a5 === void 0 ? void 0 : _a5.access_token
           });
           if (error) {
             return this._returnResult({ data: null, error });
@@ -13807,7 +13807,7 @@ var GoTrueClient = class _GoTrueClient {
     return this._acquireLock(-1, async () => {
       try {
         return await this._useSession(async (result) => {
-          var _a4;
+          var _a5;
           const { data: sessionData, error: sessionError } = result;
           if (sessionError) {
             return this._returnResult({ data: null, error: sessionError });
@@ -13815,7 +13815,7 @@ var GoTrueClient = class _GoTrueClient {
           const response = await _request(this.fetch, "POST", `${this.url}/factors/${params.factorId}/challenge`, {
             body: params,
             headers: this.headers,
-            jwt: (_a4 = sessionData === null || sessionData === void 0 ? void 0 : sessionData.session) === null || _a4 === void 0 ? void 0 : _a4.access_token
+            jwt: (_a5 = sessionData === null || sessionData === void 0 ? void 0 : sessionData.session) === null || _a5 === void 0 ? void 0 : _a5.access_token
           });
           if (response.error) {
             return response;
@@ -13865,7 +13865,7 @@ var GoTrueClient = class _GoTrueClient {
    * {@see GoTrueMFAApi#listFactors}
    */
   async _listFactors() {
-    var _a4;
+    var _a5;
     const { data: { user }, error: userError } = await this.getUser();
     if (userError) {
       return { data: null, error: userError };
@@ -13876,7 +13876,7 @@ var GoTrueClient = class _GoTrueClient {
       totp: [],
       webauthn: []
     };
-    for (const factor of (_a4 = user === null || user === void 0 ? void 0 : user.factors) !== null && _a4 !== void 0 ? _a4 : []) {
+    for (const factor of (_a5 = user === null || user === void 0 ? void 0 : user.factors) !== null && _a5 !== void 0 ? _a5 : []) {
       data.all.push(factor);
       if (factor.status === "verified") {
         ;
@@ -13892,7 +13892,7 @@ var GoTrueClient = class _GoTrueClient {
    * {@see GoTrueMFAApi#getAuthenticatorAssuranceLevel}
    */
   async _getAuthenticatorAssuranceLevel() {
-    var _a4, _b;
+    var _a5, _b;
     const { data: { session }, error: sessionError } = await this.getSession();
     if (sessionError) {
       return this._returnResult({ data: null, error: sessionError });
@@ -13909,7 +13909,7 @@ var GoTrueClient = class _GoTrueClient {
       currentLevel = payload.aal;
     }
     let nextLevel = currentLevel;
-    const verifiedFactors = (_b = (_a4 = session.user.factors) === null || _a4 === void 0 ? void 0 : _a4.filter((factor) => factor.status === "verified")) !== null && _b !== void 0 ? _b : [];
+    const verifiedFactors = (_b = (_a5 = session.user.factors) === null || _a5 === void 0 ? void 0 : _a5.filter((factor) => factor.status === "verified")) !== null && _b !== void 0 ? _b : [];
     if (verifiedFactors.length > 0) {
       nextLevel = "aal2";
     }
@@ -14215,7 +14215,7 @@ var SupabaseClient = class {
    * ```
    */
   constructor(supabaseUrl, supabaseKey, options) {
-    var _a4, _b, _c;
+    var _a5, _b, _c;
     this.supabaseUrl = supabaseUrl;
     this.supabaseKey = supabaseKey;
     const baseUrl = validateSupabaseUrl(supabaseUrl);
@@ -14234,7 +14234,7 @@ var SupabaseClient = class {
       global: DEFAULT_GLOBAL_OPTIONS
     };
     const settings = applySettingDefaults(options !== null && options !== void 0 ? options : {}, DEFAULTS);
-    this.storageKey = (_a4 = settings.auth.storageKey) !== null && _a4 !== void 0 ? _a4 : "";
+    this.storageKey = (_a5 = settings.auth.storageKey) !== null && _a5 !== void 0 ? _a5 : "";
     this.headers = (_b = settings.global.headers) !== null && _b !== void 0 ? _b : {};
     if (!settings.accessToken) {
       this.auth = this._initSupabaseAuthClient((_c = settings.auth) !== null && _c !== void 0 ? _c : {}, this.headers, settings.global.fetch);
@@ -14352,12 +14352,12 @@ var SupabaseClient = class {
     return this.realtime.removeAllChannels();
   }
   async _getAccessToken() {
-    var _a4, _b;
+    var _a5, _b;
     if (this.accessToken) {
       return await this.accessToken();
     }
     const { data } = await this.auth.getSession();
-    return (_b = (_a4 = data.session) === null || _a4 === void 0 ? void 0 : _a4.access_token) !== null && _b !== void 0 ? _b : this.supabaseKey;
+    return (_b = (_a5 = data.session) === null || _a5 === void 0 ? void 0 : _a5.access_token) !== null && _b !== void 0 ? _b : this.supabaseKey;
   }
   _initSupabaseAuthClient({ autoRefreshToken, persistSession, detectSessionInUrl, storage, userStorage, storageKey, flowType, lock, debug, throwOnError }, headers, fetch2) {
     const authHeaders = {
@@ -14741,6 +14741,33 @@ var Layout = /* @__PURE__ */ __name((title, content) => html(_a2 || (_a2 = __tem
       
       html:not(.dark) .prose blockquote {
         color: #64748b;
+        border-left-color: #0f172a;
+      }
+
+      /* Fixes for Lists in Light Mode */
+      html:not(.dark) .prose ul, 
+      html:not(.dark) .prose ol {
+        color: #334155;
+      }
+      
+      html:not(.dark) .prose li {
+        color: #334155;
+      }
+
+      html:not(.dark) .prose ul > li::before {
+        background-color: #94a3b8; /* Bullet color */
+      }
+
+      html:not(.dark) .prose ol > li::before {
+        color: #64748b; /* Number color */
+      }
+
+      /* Fixes for Inline Code in Light Mode */
+      html:not(.dark) .prose code {
+        background-color: #f1f5f9;
+        color: #0f172a;
+        border: 1px solid #e2e8f0;
+        font-weight: 600;
       }
     </style>
     <script>
@@ -15207,7 +15234,8 @@ var BlogPage = /* @__PURE__ */ __name((posts) => {
 // src/pages/blogPost.ts
 init_checked_fetch();
 init_modules_watch_stub();
-var BlogPostPage = /* @__PURE__ */ __name((post3, comments) => {
+var _a4;
+var BlogPostPage = /* @__PURE__ */ __name((post3, comments, showSuccessMessage = false) => {
   return Layout(`${post3.title} - Mi Blog`, html`
     ${Header("/blog")}
     
@@ -15242,10 +15270,37 @@ var BlogPostPage = /* @__PURE__ */ __name((post3, comments) => {
         </article>
 
         <!-- Comments Section -->
-        <section class="mt-12">
+        <section id="comments" class="mt-12">
           <h2 class="text-3xl font-bold mb-6">
             Comentarios (${comments.length})
           </h2>
+
+          ${showSuccessMessage ? html(_a4 || (_a4 = __template([`
+            <div id="success-message" class="mb-8 p-4 rounded-xl bg-green-100 dark:bg-green-900/30 border border-green-200 dark:border-green-800 text-green-800 dark:text-green-200 flex items-center gap-3 animate-fade-in transition-opacity duration-500">
+              <svg class="w-6 h-6 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+              </svg>
+              <div>
+                <p class="font-bold">\xA1Comentario enviado con \xE9xito!</p>
+                <p class="text-sm opacity-90">Tu comentario est\xE1 pendiente de moderaci\xF3n y ser\xE1 publicado en breve.</p>
+              </div>
+            </div>
+            <script>
+              // Desaparecer el mensaje despu\xE9s de 5 segundos
+              setTimeout(() => {
+                const msg = document.getElementById('success-message');
+                if (msg) {
+                  msg.style.opacity = '0';
+                  setTimeout(() => msg.remove(), 500); // Esperar a que termine la transici\xF3n
+                  
+                  // Limpiar la URL para que no vuelva a salir al recargar
+                  const url = new URL(window.location);
+                  url.searchParams.delete('comment_success');
+                  window.history.replaceState({}, '', url);
+                }
+              }, 5000);
+            <\/script>
+          `]))) : ""}
           
           ${comments.length === 0 ? html`
             <div class="glass border dark:border-slate-700/50 border-slate-200 rounded-2xl p-8">
@@ -15256,7 +15311,7 @@ var BlogPostPage = /* @__PURE__ */ __name((post3, comments) => {
               ${comments.map((comment) => html`
                 <div class="glass border dark:border-slate-700/50 border-slate-200 rounded-2xl p-6">
                   <div class="flex justify-between mb-3">
-                    <strong class="dark:text-slate-200 text-slate-900">${comment.author}</strong>
+                    <strong class="dark:text-slate-200 text-slate-900">${comment.author_name}</strong>
                     <span class="dark:text-slate-500 text-slate-500 text-sm">
                       ${new Date(comment.created_at).toLocaleDateString("es-ES")}
                     </span>
@@ -15266,6 +15321,60 @@ var BlogPostPage = /* @__PURE__ */ __name((post3, comments) => {
               `)}
             </div>
           `}
+        </section>
+
+        <!-- Comment Form -->
+        <section class="mt-12 mb-20">
+          <div class="glass border dark:border-slate-700/50 border-slate-200 rounded-2xl p-8">
+            <h3 class="text-2xl font-bold mb-6">Deja un comentario</h3>
+            
+            <form action="/blog/${post3.slug}/comment" method="POST" class="space-y-6">
+              <input type="hidden" name="post_id" value="${post3.id}">
+              
+              <div>
+                <label for="author_name" class="block text-sm font-medium dark:text-slate-300 text-slate-700 mb-2">Nombre</label>
+                <input 
+                  type="text" 
+                  id="author_name" 
+                  name="author_name" 
+                  required
+                  class="w-full px-4 py-3 rounded-xl bg-white/50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700 focus:ring-2 focus:ring-primary-400 outline-none transition-all"
+                  placeholder="Tu nombre"
+                >
+              </div>
+
+              <div>
+                <label for="author_email" class="block text-sm font-medium dark:text-slate-300 text-slate-700 mb-2">Correo Electrónico (No será publicado)</label>
+                <input 
+                  type="email" 
+                  id="author_email" 
+                  name="author_email" 
+                  required
+                  class="w-full px-4 py-3 rounded-xl bg-white/50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700 focus:ring-2 focus:ring-primary-400 outline-none transition-all"
+                  placeholder="tu@email.com"
+                >
+              </div>
+              
+              <div>
+                <label for="content" class="block text-sm font-medium dark:text-slate-300 text-slate-700 mb-2">Comentario</label>
+                <textarea 
+                  id="content" 
+                  name="content" 
+                  rows="4" 
+                  required
+                  class="w-full px-4 py-3 rounded-xl bg-white/50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700 focus:ring-2 focus:ring-primary-400 outline-none transition-all resize-none"
+                  placeholder="Escribe tu comentario aquí..."
+                ></textarea>
+              </div>
+              
+              <button 
+                type="submit" 
+                class="w-full md:w-auto bg-gradient-to-r dark:from-primary-400 dark:to-red-500 from-slate-900 to-slate-700 text-white font-bold px-8 py-3 rounded-xl hover:opacity-90 transition-opacity shadow-lg"
+              >
+                Publicar Comentario
+              </button>
+            </form>
+          </div>
         </section>
       </div>
     </main>
@@ -15985,14 +16094,45 @@ app.get("/blog/:slug", async (c) => {
     if (postError || !post3) {
       return c.html("<h1>Post no encontrado</h1>", 404);
     }
-    const { data: comments, error: commentsError } = await supabase.from("comments").select("*").eq("post_id", post3.id).order("created_at", { ascending: true });
+    const { data: comments, error: commentsError } = await supabase.from("comments").select("*").eq("post_id", post3.id).eq("approved", true).order("created_at", { ascending: true });
     if (commentsError) {
-      console.error("Error fetching comments:", commentsError);
+      console.error("\u274C Error Supabase (GET comments):", JSON.stringify(commentsError, null, 2));
+    } else {
+      console.log("\u2705 Comentarios cargados:", comments?.length || 0);
     }
-    return c.html(BlogPostPage(post3, comments || []));
+    const showSuccessMessage = c.req.query("comment_success") === "true";
+    return c.html(BlogPostPage(post3, comments || [], showSuccessMessage));
   } catch (error) {
-    console.error("Error:", error);
+    console.error("\u274C Error General (GET post):", error);
     return c.html("<h1>Error al cargar el post</h1>", 500);
+  }
+});
+app.post("/blog/:slug/comment", async (c) => {
+  const slug = c.req.param("slug");
+  const body = await c.req.parseBody();
+  const { post_id, author_name, author_email, content } = body;
+  const supabase = createSupabaseClient(c.env);
+  console.log("\u{1F4DD} Intentando guardar comentario:", { post_id, author_name, author_email });
+  try {
+    const { data, error } = await supabase.from("comments").insert([
+      {
+        post_id: Number(post_id),
+        author_name: String(author_name),
+        author_email: String(author_email),
+        content: String(content),
+        approved: false
+        // Por defecto pendiente de aprobación
+      }
+    ]).select();
+    if (error) {
+      console.error("\u274C Error Supabase (INSERT comment):", JSON.stringify(error, null, 2));
+      return c.html(`<h1>Error al guardar: ${error.message}</h1><p>Detalles: ${error.details || ""}</p><a href="/blog/${slug}">Volver</a>`, 500);
+    }
+    console.log("\u2705 Comentario guardado correctamente:", data);
+    return c.redirect(`/blog/${slug}?comment_success=true#comments`);
+  } catch (error) {
+    console.error("\u274C Error General (POST comment):", error);
+    return c.html(`<h1>Error inesperado</h1><p>${String(error)}</p>`, 500);
   }
 });
 app.get("/contacto", (c) => {
