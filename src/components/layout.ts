@@ -16,7 +16,7 @@ export const Layout = (metadata: SEOMetadata, content: any) => {
     title,
     description,
     keywords = 'desarrollo web, Hono, Cloudflare Workers, TypeScript, React, aplicaciones web, edge computing',
-    ogImage = 'https://mi-app-hono.ximosa.workers.dev/og-image.jpg',
+    ogImage = 'https://mi-app-hono.ximosa.workers.dev/og-image.png',
     ogType = 'website',
     canonicalUrl = 'https://mi-app-hono.ximosa.workers.dev',
     author = 'WebGae Dev',
