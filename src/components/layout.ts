@@ -7,60 +7,8 @@ export const Layout = (title: string, content: any) => html`
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>${title}</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-      tailwind.config = {
-        darkMode: 'class',
-        theme: {
-          extend: {
-            colors: {
-              primary: {
-                50: '#fef3c7',
-                100: '#fde68a',
-                200: '#fcd34d',
-                300: '#fbbf24',
-                400: '#f59e0b',
-                500: '#d97706',
-                600: '#b45309',
-                700: '#92400e',
-                800: '#78350f',
-                900: '#451a03',
-              }
-            },
-            fontFamily: {
-              sans: ['Inter', 'system-ui', 'sans-serif'],
-            },
-            typography: {
-              DEFAULT: {
-                css: {
-                  maxWidth: 'none',
-                  color: '#cbd5e1',
-                  a: {
-                    color: '#f59e0b',
-                    '&:hover': {
-                      color: '#d97706',
-                    },
-                  },
-                  h1: { color: '#f8fafc' },
-                  h2: { color: '#f8fafc' },
-                  h3: { color: '#f8fafc' },
-                  h4: { color: '#f8fafc' },
-                  strong: { color: '#e2e8f0' },
-                  code: { color: '#fbbf24' },
-                  blockquote: {
-                    color: '#94a3b8',
-                    borderLeftColor: '#f59e0b',
-                  },
-                },
-              },
-            },
-          }
-        }
-      }
-    </script>
+    <meta name="description" content="Desarrollador Web Full Stack especializado en Hono, Cloudflare Workers y React.">
+    <link href="/styles.css" rel="stylesheet">
     <style>
       body {
         font-family: 'Inter', system-ui, -apple-system, sans-serif;

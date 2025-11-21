@@ -9,7 +9,16 @@ import { ServicesPage } from './pages/services'
 import { PricingPage } from './pages/pricing'
 import { Post, Comment } from './types'
 
+import { serveStatic } from 'hono/cloudflare-workers'
+// @ts-ignore
+import manifest from '__STATIC_CONTENT_MANIFEST'
+
 const app = new Hono<{ Bindings: Bindings }>()
+
+// Servir archivos estáticos
+app.use('/static/*', serveStatic({ root: './', manifest }))
+app.use('/styles.css', serveStatic({ root: './', manifest }))
+app.use('/favicon.ico', serveStatic({ root: './', manifest }))
 
 // Página de inicio
 app.get('/', (c) => {
